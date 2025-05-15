@@ -1,0 +1,23 @@
+    <div class="form-container">
+        <img src="icon.png" alt="logo" class="logo">
+        <p style="color: red; padding-bottom: 5px;" *ngIf="error" >*Correo o clave incorrectos</p>
+        <mat-form-field>
+            <mat-label>Correo Electrónico</mat-label>
+            <input matInput [(ngModel)]="email">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input type="password" matInput [(ngModel)]="password">
+        </mat-form-field>
+        
+        <div>
+            <button mat-button (click)="goToRegistrarse()">Registrarse</button>
+            <button mat-flat-button (click)="login()">Ingresar</button>
+        </div>
+        <div>
+            <br>
+            <button (click)="llenarAlpha()">a</button>
+            <button (click)="llenarBeta()">b</button>
+            <button (click)="llenarGamma()">c</button>
+        </div>
+    </div>

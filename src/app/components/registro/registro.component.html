@@ -1,0 +1,25 @@
+    <div class="form-container">
+        <img src="icon.png" alt="logo" class="logo">
+        <p>Registrarse</p>
+        <p style="color: red; padding-bottom: 5px;" *ngIf="errorUsuarioExiste" >*El correo ya está registrado</p>
+        <mat-form-field>
+            <mat-label>Correo Electrónico</mat-label>
+            <input
+                matInput
+                [(ngModel)]="correo"
+                [formControl]="emailFormControl"
+                [errorStateMatcher]="matcher">
+            @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+            <mat-error>Dirección de correo inválido</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input 
+                type="password"
+                matInput
+                [(ngModel)]="password"
+                [formControl]="passwordFormControl">
+        </mat-form-field>
+            <button mat-flat-button (click)="registrar()">Confirmar</button>
+    </div>
