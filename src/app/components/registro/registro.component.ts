@@ -27,6 +27,7 @@ export class RegistroComponent {
   correo: string = '';
   password: string = '';
   errorUsuarioExiste : boolean = false;
+  errorWeakPass : boolean = false;
   readonly emailFormControl  = new FormControl('', [Validators.required, Validators.email]);
   readonly passwordFormControl  = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
@@ -36,6 +37,8 @@ export class RegistroComponent {
 
   registrar()
   {
+    this.errorUsuarioExiste = false;
+    this.errorWeakPass = false;
     supabase.auth.signUp
     (
       {
@@ -44,12 +47,21 @@ export class RegistroComponent {
       }
     ).then(({error}) =>
       {
-        if(error?.code == 'user_already_exists')
+        switch(error?.code)
         {
-          console.error('Error:', error.message);
-          this.errorUsuarioExiste = true;
-        } else {
-          this.router.navigate(['/home'])
+          case 'user_already_exists':
+            console.error('Error:', error.message);
+            this.errorUsuarioExiste = true;
+            break;
+
+          case 'weak_password':
+            console.error('Error:', error.message);
+            this.errorWeakPass = true;
+            break;
+
+          default:
+            this.router.navigate(['/home']);
+            break;
         }
       }
     )
