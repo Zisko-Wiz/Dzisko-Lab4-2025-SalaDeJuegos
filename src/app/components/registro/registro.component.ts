@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { createClient } from '@supabase/supabase-js'
-import { environment } from '../../../environments/environment';
+import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import {ErrorStateMatcher} from '@angular/material/core';
 
