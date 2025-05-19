@@ -4,12 +4,9 @@ import { NgForm, FormControl, FormsModule, ReactiveFormsModule, Validators, Form
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { createClient } from '@supabase/supabase-js'
-import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import {ErrorStateMatcher} from '@angular/material/core';
-
-const supabase = createClient(environment.apiUrl, environment.publicAnonKey)
+import { SupaService } from '../../services/supa.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -33,13 +30,13 @@ export class RegistroComponent {
   matcher = new MyErrorStateMatcher();
 
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private supa: SupaService){}
 
   registrar()
   {
     this.errorUsuarioExiste = false;
     this.errorWeakPass = false;
-    supabase.auth.signUp
+    this.supa.supabase.auth.signUp
     (
       {
         email: this.correo,
@@ -59,9 +56,14 @@ export class RegistroComponent {
             this.errorWeakPass = true;
             break;
 
-          default:
+          case null:
             this.router.navigate(['/home']);
             break;
+            
+          default:
+            console.error('Error:', error?.message);
+            break;
+
         }
       }
     )

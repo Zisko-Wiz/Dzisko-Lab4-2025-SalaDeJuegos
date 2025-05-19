@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { createClient } from '@supabase/supabase-js';
-import { environment } from '../../environments/environment';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-
-const supabase = createClient(environment.apiUrl, environment.publicAnonKey)
+import { SupaService } from '../../services/supa.service';
 
 
 @Component({
@@ -24,7 +21,7 @@ export class LoginComponent
   password: string = '';
   error: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private supa: SupaService) {}
 
   goToRegistrarse()
   {
@@ -33,7 +30,7 @@ export class LoginComponent
 
   login()
   {
-    supabase.auth.signInWithPassword
+    this.supa.supabase.auth.signInWithPassword
     ({
       email: this.email,
       password: this.password
@@ -44,7 +41,7 @@ export class LoginComponent
         console.error('Error: ', error.message);
         this.error = true;
       }else{
-        supabase.from('ingresos').insert([
+        this.supa.supabase.from('ingresos').insert([
           {
             usuario: data.user.email
           }

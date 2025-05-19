@@ -1,0 +1,36 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li button {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 2vh 5vi;
+  text-decoration: none;
+}
+
+li button:hover {
+  background-color: #111;
+}
+
+li h1
+{
+  color: white;
+  font-size: larger;
+}
+
+.logo
+{
+    object-fit: contain;
+    width: 100%;
+    height: 7vh;
+}
