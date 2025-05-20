@@ -1,9 +1,8 @@
 <div>
     <ul>
         <img style="float: left;" src="icon.png" alt="logo" class="logo">
-        <li><button (click)="test()">Home</button></li>
         <li><h1>{{mensajeBienvenida}}</h1></li>
-        @if (this.signInServer.user != null)
+        @if (this.ingreso)
         {
             <li style="float:right"><button (click)="logOut()">Salir</button></li>
         } @else

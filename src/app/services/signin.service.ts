@@ -6,6 +6,7 @@ import { SupaService } from './supa.service';
 })
 export class SigninService {
   public user: object|null = null;
+  public email: string = "";
 
   constructor(private supaService: SupaService)
   {
@@ -14,6 +15,13 @@ export class SigninService {
 
   public getUser()
     {
-      this.supaService.supabase.auth.getUser().then(({data}) => {this.user = data.user});
+      this.supaService.supabase.auth.getUser().then(({data}) =>
+        { 
+          this.user = data.user;
+          if (data.user?.email != undefined)
+          {
+            this.email = data.user.email;
+          }
+        });
     }
 }

@@ -6,30 +6,27 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
-  imports: [ FormsModule],
+  imports: [ FormsModule ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit
 {
   public ingreso: Boolean = false;
-  public mensajeBienvenida : string = 'BIENVENIDO';
+  public mensajeBienvenida? : string = '';
 
   constructor( private router: Router, private supa: SupaService, protected signInServer: SigninService){}
 
   ngOnInit(): void
   {
     this.signInServer.getUser();
-    setTimeout(() => 
-    { console.log(this.signInServer.user);
       if (this.signInServer.user != null)
       {
-        this.mensajeBienvenida = "bienvenido teto";
-        console.log("teto");
+        let nombre: string  = this.signInServer.email?.replace(/\@+(.+)/, "");
+        let nombreCapitalized: string = nombre[0].toUpperCase() + nombre?.slice(1);
+        this.mensajeBienvenida = "Bienvenido " + nombreCapitalized;
+        this.ingreso = true;
       }
-  }, 1000)
-
-    
   }
 
   public goToLogin()
@@ -50,13 +47,8 @@ export class HeaderComponent implements OnInit
         console.error('Error: ', error.message)
       }else{
         this.ingreso = false;
-        this.signInServer.getUser();
+        this.mensajeBienvenida = "";
       }
     });
-  }
-
-  public test()
-  {
-    console.log(this.signInServer.user);
   }
 }
