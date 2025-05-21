@@ -56,12 +56,12 @@ export class RegistroComponent {
             this.errorWeakPass = true;
             break;
 
-          case null:
+          case undefined:
             this.router.navigate(['/home']);
             break;
             
           default:
-            console.error('Error:', error?.message);
+            console.error('Error:', error?.message, error?.code);
             break;
 
         }
