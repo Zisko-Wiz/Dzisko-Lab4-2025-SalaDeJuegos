@@ -1,54 +1,216 @@
 <app-header></app-header>
 <div class="container">
+    <button id="btnReset" (click)="refresh()">Reiniciar</button>
+    <div id="wordContainer">
+        <p class="word">{{this.progresoPalabra}}</p>
+    </div>
+
     <div class="gameScreen">
-        <div id="letrasUsadas" >
-            <p class="wrongLetter">A</p>
-            <p class="wrongLetter">B</p>
-            <p class="wrongLetter">C</p>
-            <p class="wrongLetter">D</p>
-            <p class="wrongLetter">E</p>
-        </div>
         <div class="podium" >
+            @if (this.letrasIncorrectas.length == 5)
+            {
+                <img class="endingBubble" src="lose.png">
+            }
+            @else if (this.end)
+            {
+                <img class="endingBubble" src="win.png">
+            }
             <img id="horca" src="horca.png">
-            <img class="monigote" src="monigote5.png">
-            <div id="wordContainer">
-                <h1 id="word">_ _ _ _ _ _ _ _ _ _</h1>
-            </div>
+            <img class="monigote" src="monigote0.png">
+            @switch (letrasIncorrectas.length)
+            {
+                @case (1)
+                {
+                    <img class="monigote" src="monigote1.png">
+                }
+                @case (2)
+                {
+                    <img class="monigote" src="monigote2.png">
+                }
+                @case (3)
+                {
+                    <img class="monigote" src="monigote3.png">
+                }
+                @case (4)
+                {
+                    <img class="monigote" src="monigote4.png">
+                }
+                @case (5)
+                {
+                    <img class="monigote" src="monigote5.png">
+                }
+            }
         </div>
     </div>
-    <div class="keyboard">
+    <div class="keyboard"
+        [style.pointer-events]=" (this.end) ? 'none' : 'auto' "
+        >
         <div class="keyboardRow">
-            <span class="key">Q</span>
-            <span class="key">W</span>
-            <span class="key">E</span>
-            <span class="key">R</span>
-            <span class="key">T</span>
-            <span class="key">Y</span>
-            <span class="key">U</span>
-            <span class="key">I</span>
-            <span class="key">O</span>
-            <span class="key">P</span>
+            <span class="key"
+                (click)="ingresarLetra('Q')" 
+                [class.disabledKey]="(this.letrasIncorrectas.includes('Q'))"
+                >Q
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('W')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('W'))"
+                >W
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('E')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('E'))"
+                >E
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('R')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('R'))"
+                >R
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('T')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('T'))"
+                >T
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('Y')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('Y'))"
+                >Y
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('U')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('U'))"
+                >U
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('I')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('I'))"
+                >I
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('O')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('O'))"
+                >O
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('P')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('P'))"
+                >P
+            </span>
         </div>
         <div class="keyboardRow">
-            <span class="key">A</span>
-            <span class="key">S</span>
-            <span class="key">D</span>
-            <span class="key">F</span>
-            <span class="key">G</span>
-            <span class="key">H</span>
-            <span class="key">J</span>
-            <span class="key">K</span>
-            <span class="key">L</span>
-            <span class="key">Ñ</span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('A')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('A'))"
+                >A
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('S')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('S'))"
+                >S
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('D')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('D'))"
+                >D
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('F')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('F'))"
+                >F
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('G')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('G'))"
+                >G
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('H')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('H'))"
+                >H
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('J')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('J'))"
+                >J
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('K')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('K'))"
+                >K
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('L')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('L'))"
+                >L
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('Ñ')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('Ñ'))"
+                >Ñ
+            </span>
         </div>
         <div class="keyboardRow">
-            <span class="key">Z</span>
-            <span class="key">X</span>
-            <span class="key">C</span>
-            <span class="key">V</span>
-            <span class="key">B</span>
-            <span class="key">N</span>
-            <span class="key">M</span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('Z')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('Z'))"
+                >Z
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('X')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('X'))"
+                >X
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('C')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('C'))"
+                >C
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('V')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('V'))"
+                >V
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('B')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('B'))"
+                >B
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('N')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('N'))"
+                >N
+            </span>
+            <span 
+                class="key"
+                (click)="ingresarLetra('M')"
+                [class.disabledKey]="(this.letrasIncorrectas.includes('M'))"
+                >M
+            </span>
         </div>
     </div>
 </div>

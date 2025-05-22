@@ -14,7 +14,7 @@ export class HomeComponent {
 
   goToAhorcado()
   {
-    this.router.navigate(['juegos/ahorcado'])
+    this.router.navigate(['juegos/ahorcado']);
   }
 
   goToMayorMenor()

@@ -23,20 +23,25 @@ body
     padding:10px;
     margin-bottom:5px;
     background-color:rgb(65, 61, 61);
+    user-select: none;
+}
+
+.key:hover
+{
+    background-color: rgb(33, 196, 182);
 }
 
 .gameScreen
 {
+    user-select: none;
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    margin-top: 10vh;
     margin-bottom: 3vh;
     height: 50vh;
     width: 50vi;
     border-style: ridge;
     background: url('../../assets/white-paper-texture.jpg');
-
 }
 
 .podium
@@ -44,7 +49,6 @@ body
     position: relative;
     display: block;
     width: 45vi;
-    border-style: solid;
 }
 
 .monigote, #horca
@@ -67,7 +71,7 @@ body
     object-fit: contain;
 }
 
-#horca
+#horca, .endingBubble
 {
     z-index: 5;
     max-height: 90%;
@@ -80,6 +84,11 @@ body
     top: 10%;
     margin:auto;
     object-fit: contain;
+}
+
+.endingBubble
+{
+    z-index: 20;
 }
 
 #letrasUsadas
@@ -95,7 +104,7 @@ body
     border-right-width: 0;
 }
 
-h1
+p
 {
     font-size: 90%;
 }
@@ -109,19 +118,29 @@ h1
 
 #wordContainer
 {
+    background: url('../../assets/white-paper-texture.jpg');
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    width: 50vi;
     border-style: solid;
-    border-color: red;
-
+    border-bottom-width: 0;
 }
 
-#word
+.word
 {
-    font-size: 3vh;
+    font-size: 100%;
+    margin-right: 0.5em;
+}
+
+.disabledKey
+{
+    background-color: red;
+    pointer-events: none;
+}
+
+#btnReset
+{
+    margin-top: 10vh;
+    float: left;
 }
