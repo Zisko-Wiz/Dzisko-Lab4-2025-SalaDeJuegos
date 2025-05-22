@@ -16,30 +16,24 @@
                 <img class="endingBubble" src="win.png">
             }
             <img id="horca" src="horca.png">
-            <img class="monigote" src="monigote0.png">
-            @switch (letrasIncorrectas.length)
-            {
-                @case (1)
-                {
-                    <img class="monigote" src="monigote1.png">
-                }
-                @case (2)
-                {
-                    <img class="monigote" src="monigote2.png">
-                }
-                @case (3)
-                {
-                    <img class="monigote" src="monigote3.png">
-                }
-                @case (4)
-                {
-                    <img class="monigote" src="monigote4.png">
-                }
-                @case (5)
-                {
-                    <img class="monigote" src="monigote5.png">
-                }
-            }
+            <img class="monigote"
+            src="monigote0.png">
+
+            <img class="monigote"
+            src="monigote1.png"
+            [style.z-index]="(this.letrasIncorrectas.length >= 1) ? 20 : -1">
+            <img class="monigote"
+            src="monigote2.png"
+            [style.z-index]="(this.letrasIncorrectas.length >= 2) ? 30 : -1">
+            <img class="monigote"
+            src="monigote3.png"
+            [style.z-index]="(this.letrasIncorrectas.length >= 3) ? 40 : -1">
+            <img class="monigote"
+            src="monigote4.png"
+            [style.z-index]="(this.letrasIncorrectas.length >= 4) ? 50 : -1">
+            <img class="monigote"
+            src="monigote5.png"
+            [style.z-index]="(this.letrasIncorrectas.length >= 5) ? 60 : -1">
         </div>
     </div>
     <div class="keyboard"
