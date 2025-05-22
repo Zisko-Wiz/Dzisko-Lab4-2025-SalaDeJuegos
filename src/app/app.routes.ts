@@ -1,8 +1,4 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
-import { AboutComponent } from './components/about/about.component';
-import { RegistroComponent } from './components/registro/registro.component';
 
 export const routes: Routes = [
     {
@@ -11,19 +7,23 @@ export const routes: Routes = [
         redirectTo: 'home',
     },
     {
+        path: 'juegos',
+        loadChildren: () => import('./modules/juegos/juegos.module').then(m => m.JuegosModule)
+    },
+    {
         path: 'login',
-        component: LoginComponent
+        loadComponent: () => import('./components/login/login.component').then(c => c.LoginComponent)
     },
     {
         path: 'home',
-        component: HomeComponent
+        loadComponent: () => import('./components/home/home.component').then(c => c.HomeComponent)
     },
     {
         path: 'quienSoy',
-        component: AboutComponent
+        loadComponent: () => import('./components/about/about.component').then(c => c.AboutComponent)
     },
     {
         path: 'registrarse',
-        component: RegistroComponent
+        loadComponent: () => import('./components/registro/registro.component').then(c => c.RegistroComponent)
     }
 ];
