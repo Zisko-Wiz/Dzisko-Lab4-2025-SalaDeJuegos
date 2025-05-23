@@ -3,6 +3,7 @@ import { HeaderComponent } from '../header/header.component';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { Router, RouteReuseStrategy } from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-ahorcado',
@@ -10,6 +11,7 @@ import { Router, RouteReuseStrategy } from '@angular/router';
   [
     HeaderComponent,
     CommonModule,
+    MatButtonModule
   ],
   templateUrl: './ahorcado.component.html',
   styleUrl: './ahorcado.component.scss',
@@ -102,5 +104,17 @@ export class AhorcadoComponent implements OnInit, OnDestroy
     }
     this.router.navigated = false;
     this.router.navigate([this.router.url]);
+  }
+
+  checkIfLetterIsUsed(letter:string) : number
+  {
+    if (this.letrasIncorrectas.includes(letter))
+    {
+      return 1;
+    } else if ( this.letrasCorrectas.includes(letter))
+    {
+      return 2;
+    }
+    return 0;
   }
 }

@@ -109,13 +109,6 @@ p
     font-size: 90%;
 }
 
-.wrongLetter
-{
-    font-size: 2vw;
-    font-style: italic;
-    text-shadow: 1px 1px red;
-}
-
 #wordContainer
 {
     background: url('../../assets/white-paper-texture.jpg');
@@ -133,9 +126,14 @@ p
     margin-right: 0.5em;
 }
 
-.disabledKey
+.wrongKey
 {
     background-color: red;
+    pointer-events: none;
+}
+.correctKey
+{
+    background-color: green;
     pointer-events: none;
 }
 
@@ -143,4 +141,10 @@ p
 {
     margin-top: 10vh;
     float: left;
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+    color: rgb(27, 189, 127);
+    background-color: rgb(65, 61, 61);
 }

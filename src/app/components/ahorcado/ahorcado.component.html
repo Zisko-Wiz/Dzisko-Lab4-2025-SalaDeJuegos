@@ -1,6 +1,7 @@
 <app-header></app-header>
 <div class="container">
-    <button id="btnReset" (click)="refresh()">Reiniciar</button>
+    
+    <button mat-button id="btnReset" (click)="refresh()">Reiniciar</button>
     <div id="wordContainer">
         <p class="word">{{this.progresoPalabra}}</p>
     </div>
@@ -42,61 +43,71 @@
         <div class="keyboardRow">
             <span class="key"
                 (click)="ingresarLetra('Q')" 
-                [class.disabledKey]="(this.letrasIncorrectas.includes('Q'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('Q') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('Q') == 2)"
                 >Q
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('W')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('W'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('W')) == 1"
+                [class.correctKey]="(this.checkIfLetterIsUsed('W') == 2)"
                 >W
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('E')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('E'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('E') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('E') == 2)"
                 >E
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('R')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('R'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('R') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('R') == 2)"
                 >R
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('T')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('T'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('T') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('T') == 2)"
                 >T
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('Y')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('Y'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('Y') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('Y') == 2)"
                 >Y
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('U')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('U'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('U') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('U') == 2)"
                 >U
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('I')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('I'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('I') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('I') == 2)"
                 >I
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('O')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('O'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('O') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('O') == 2)"
                 >O
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('P')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('P'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('P') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('P') == 2)"
                 >P
             </span>
         </div>
@@ -104,61 +115,71 @@
             <span 
                 class="key"
                 (click)="ingresarLetra('A')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('A'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('A') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('A') == 2)"
                 >A
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('S')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('S'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('S') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('S') == 2)"
                 >S
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('D')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('D'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('D') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('D') == 2)"
                 >D
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('F')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('F'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('F') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('F') == 2)"
                 >F
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('G')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('G'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('G') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('G') == 2)"
                 >G
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('H')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('H'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('H') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('H') == 2)"
                 >H
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('J')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('J'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('J') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('J') == 2)"
                 >J
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('K')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('K'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('K') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('K') == 2)"
                 >K
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('L')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('L'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('L') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('L') == 2)"
                 >L
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('Ñ')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('Ñ'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('Ñ') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('Ñ') == 2)"
                 >Ñ
             </span>
         </div>
@@ -166,43 +187,50 @@
             <span 
                 class="key"
                 (click)="ingresarLetra('Z')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('Z'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('Z') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('Z') == 2)"
                 >Z
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('X')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('X'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('X') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('X') == 2)"
                 >X
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('C')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('C'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('C') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('C') == 2)"
                 >C
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('V')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('V'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('V') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('V') == 2)"
                 >V
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('B')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('B'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('B') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('B') == 2)"
                 >B
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('N')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('N'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('N') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('N') == 2)"
                 >N
             </span>
             <span 
                 class="key"
                 (click)="ingresarLetra('M')"
-                [class.disabledKey]="(this.letrasIncorrectas.includes('M'))"
+                [class.wrongKey]="(this.checkIfLetterIsUsed('M') == 1)"
+                [class.correctKey]="(this.checkIfLetterIsUsed('M') == 2)"
                 >M
             </span>
         </div>
