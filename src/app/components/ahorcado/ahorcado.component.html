@@ -1,116 +1,124 @@
-<app-header></app-header>
-<div class="container">
-    
-    <button mat-button id="btnReset" (click)="refresh()">Reiniciar</button>
-    <div id="wordContainer">
-        <p class="word">{{this.progresoPalabra}}</p>
-    </div>
+<app-header class="header"></app-header>
 
+<div class="container">
+
+    <app-chat class="chat"></app-chat>
+    
     <div class="gameScreen">
+
+        <button mat-button id="btnReset" (click)="refresh()">Reiniciar</button>
+        
+        <div class="puntaje">
+            <p>ACÁ VA EL PUNTAJE</p>
+        </div>
+
+        <div id="wordContainer">
+            <p class="word">{{this.progresoPalabra}}</p>
+        </div>
+
         <div class="podium" >
             @if (this.letrasIncorrectas.length == 5)
             {
-                <img class="endingBubble" src="lose.png">
+                <img draggable="false" class="endingBubble" src="lose.png">
             }
             @else if (this.end)
             {
-                <img class="endingBubble" src="win.png">
+                <img draggable="false"  class="endingBubble" src="win.png">
             }
-            <img id="horca" src="horca.png">
-            <img class="monigote"
+            <img draggable="false"  id="horca" src="horca.png">
+            <img draggable="false"  class="monigote"
             src="monigote0.png">
-
-            <img class="monigote"
+            <img draggable="false"  class="monigote"
             src="monigote1.png"
             [style.z-index]="(this.letrasIncorrectas.length >= 1) ? 20 : -1">
-            <img class="monigote"
+            <img draggable="false"  class="monigote"
             src="monigote2.png"
             [style.z-index]="(this.letrasIncorrectas.length >= 2) ? 30 : -1">
-            <img class="monigote"
+            <img draggable="false"  class="monigote"
             src="monigote3.png"
             [style.z-index]="(this.letrasIncorrectas.length >= 3) ? 40 : -1">
-            <img class="monigote"
+            <img draggable="false"  class="monigote"
             src="monigote4.png"
             [style.z-index]="(this.letrasIncorrectas.length >= 4) ? 50 : -1">
-            <img class="monigote"
+            <img draggable="false"  class="monigote"
             src="monigote5.png"
             [style.z-index]="(this.letrasIncorrectas.length >= 5) ? 60 : -1">
         </div>
-    </div>
-    <div class="keyboard"
-        [style.pointer-events]=" (this.end) ? 'none' : 'auto' "
-        >
-        <div class="keyboardRow">
-            <span class="key"
-                (click)="ingresarLetra('Q')" 
-                [class.wrongKey]="(this.checkIfLetterIsUsed('Q') == 1)"
-                [class.correctKey]="(this.checkIfLetterIsUsed('Q') == 2)"
-                >Q
-            </span>
-            <span 
-                class="key"
-                (click)="ingresarLetra('W')"
-                [class.wrongKey]="(this.checkIfLetterIsUsed('W')) == 1"
-                [class.correctKey]="(this.checkIfLetterIsUsed('W') == 2)"
-                >W
-            </span>
-            <span 
-                class="key"
-                (click)="ingresarLetra('E')"
-                [class.wrongKey]="(this.checkIfLetterIsUsed('E') == 1)"
-                [class.correctKey]="(this.checkIfLetterIsUsed('E') == 2)"
-                >E
-            </span>
-            <span 
-                class="key"
-                (click)="ingresarLetra('R')"
-                [class.wrongKey]="(this.checkIfLetterIsUsed('R') == 1)"
-                [class.correctKey]="(this.checkIfLetterIsUsed('R') == 2)"
-                >R
-            </span>
-            <span 
-                class="key"
-                (click)="ingresarLetra('T')"
-                [class.wrongKey]="(this.checkIfLetterIsUsed('T') == 1)"
-                [class.correctKey]="(this.checkIfLetterIsUsed('T') == 2)"
-                >T
-            </span>
-            <span 
-                class="key"
-                (click)="ingresarLetra('Y')"
-                [class.wrongKey]="(this.checkIfLetterIsUsed('Y') == 1)"
-                [class.correctKey]="(this.checkIfLetterIsUsed('Y') == 2)"
-                >Y
-            </span>
-            <span 
-                class="key"
-                (click)="ingresarLetra('U')"
-                [class.wrongKey]="(this.checkIfLetterIsUsed('U') == 1)"
-                [class.correctKey]="(this.checkIfLetterIsUsed('U') == 2)"
-                >U
-            </span>
-            <span 
-                class="key"
-                (click)="ingresarLetra('I')"
-                [class.wrongKey]="(this.checkIfLetterIsUsed('I') == 1)"
-                [class.correctKey]="(this.checkIfLetterIsUsed('I') == 2)"
-                >I
-            </span>
-            <span 
-                class="key"
-                (click)="ingresarLetra('O')"
-                [class.wrongKey]="(this.checkIfLetterIsUsed('O') == 1)"
-                [class.correctKey]="(this.checkIfLetterIsUsed('O') == 2)"
-                >O
-            </span>
-            <span 
-                class="key"
-                (click)="ingresarLetra('P')"
-                [class.wrongKey]="(this.checkIfLetterIsUsed('P') == 1)"
-                [class.correctKey]="(this.checkIfLetterIsUsed('P') == 2)"
-                >P
-            </span>
+
+        <div class="keyboard"
+            [style.pointer-events]=" (this.end) ? 'none' : 'auto' ">
+            <div class="keyboardRow">
+                <span class="key"
+                    (click)="ingresarLetra('Q')" 
+                    [class.wrongKey]="(this.checkIfLetterIsUsed('Q') == 1)"
+                    [class.correctKey]="(this.checkIfLetterIsUsed('Q') == 2)"
+                    >Q
+                </span>
+                <span 
+                    class="key"
+                    (click)="ingresarLetra('W')"
+                    [class.wrongKey]="(this.checkIfLetterIsUsed('W')) == 1"
+                    [class.correctKey]="(this.checkIfLetterIsUsed('W') == 2)"
+                    >W
+                </span>
+                <span 
+                    class="key"
+                    (click)="ingresarLetra('E')"
+                    [class.wrongKey]="(this.checkIfLetterIsUsed('E') == 1)"
+                    [class.correctKey]="(this.checkIfLetterIsUsed('E') == 2)"
+                    >E
+                </span>
+                <span 
+                    class="key"
+                    (click)="ingresarLetra('R')"
+                    [class.wrongKey]="(this.checkIfLetterIsUsed('R') == 1)"
+                    [class.correctKey]="(this.checkIfLetterIsUsed('R') == 2)"
+                    >R
+                </span>
+                <span 
+                    class="key"
+                    (click)="ingresarLetra('T')"
+                    [class.wrongKey]="(this.checkIfLetterIsUsed('T') == 1)"
+                    [class.correctKey]="(this.checkIfLetterIsUsed('T') == 2)"
+                    >T
+                </span>
+                <span 
+                    class="key"
+                    (click)="ingresarLetra('Y')"
+                    [class.wrongKey]="(this.checkIfLetterIsUsed('Y') == 1)"
+                    [class.correctKey]="(this.checkIfLetterIsUsed('Y') == 2)"
+                    >Y
+                </span>
+                <span 
+                    class="key"
+                    (click)="ingresarLetra('U')"
+                    [class.wrongKey]="(this.checkIfLetterIsUsed('U') == 1)"
+                    [class.correctKey]="(this.checkIfLetterIsUsed('U') == 2)"
+                    >U
+                </span>
+                <span 
+                    class="key"
+                    (click)="ingresarLetra('I')"
+                    [class.wrongKey]="(this.checkIfLetterIsUsed('I') == 1)"
+                    [class.correctKey]="(this.checkIfLetterIsUsed('I') == 2)"
+                    >I
+                </span>
+                <span 
+                    class="key"
+                    (click)="ingresarLetra('O')"
+                    [class.wrongKey]="(this.checkIfLetterIsUsed('O') == 1)"
+                    [class.correctKey]="(this.checkIfLetterIsUsed('O') == 2)"
+                    >O
+                </span>
+                <span 
+                    class="key"
+                    (click)="ingresarLetra('P')"
+                    [class.wrongKey]="(this.checkIfLetterIsUsed('P') == 1)"
+                    [class.correctKey]="(this.checkIfLetterIsUsed('P') == 2)"
+                    >P
+                </span>
         </div>
+        
         <div class="keyboardRow">
             <span 
                 class="key"
@@ -183,6 +191,7 @@
                 >Ñ
             </span>
         </div>
+
         <div class="keyboardRow">
             <span 
                 class="key"
@@ -234,5 +243,11 @@
                 >M
             </span>
         </div>
+        
     </div>
+
+    </div>
+
+    
+
 </div>

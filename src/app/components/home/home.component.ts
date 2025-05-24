@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { Router } from '@angular/router';
+import { ChatComponent } from '../chat/chat.component';
 
 @Component({
   selector: 'app-home',
-  imports: [HeaderComponent],
+  imports:
+  [ HeaderComponent,
+    ChatComponent
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

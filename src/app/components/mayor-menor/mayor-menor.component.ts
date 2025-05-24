@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-mayor-menor',
-  imports: [],
+  imports:
+  [
+    HeaderComponent
+  ],
   templateUrl: './mayor-menor.component.html',
   styleUrl: './mayor-menor.component.scss',
 })
-export class MayorMenorComponent {
+export class MayorMenorComponent
+{
 
 }

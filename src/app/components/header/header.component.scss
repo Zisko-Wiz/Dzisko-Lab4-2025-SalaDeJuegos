@@ -5,7 +5,8 @@
   z-index: 5000;
 }
 
-ul {
+ul
+{
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -13,11 +14,13 @@ ul {
   background-color: #333;
 }
 
-li {
+li
+{
   float: left;
 }
 
-li button {
+li button
+{
   display: block;
   color: rgb(33, 196, 182);
   background-color: #333;
@@ -27,7 +30,8 @@ li button {
   border: none;
 }
 
-li button:hover {
+li button:hover
+{
   background-color: #111;
 }
 

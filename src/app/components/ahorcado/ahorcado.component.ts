@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { Router, RouteReuseStrategy } from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
+import { ChatComponent } from '../chat/chat.component';
 
 @Component({
   selector: 'app-ahorcado',
@@ -11,7 +12,8 @@ import {MatButtonModule} from '@angular/material/button';
   [
     HeaderComponent,
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
+    ChatComponent
   ],
   templateUrl: './ahorcado.component.html',
   styleUrl: './ahorcado.component.scss',
