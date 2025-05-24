@@ -1,20 +1,11 @@
-.container
-{
-    user-select: none;
-    display: grid;
-    grid-template-columns: 1vw 66vw 3vw 30vw;
-    grid-template-rows: 3vh 80vh;
-}
-
-.chat
-{
-    grid-area: 2 / 4 / 3 / 5;
+.game-screen
+{  
+    grid-template: 5vh 50vh 5vh 20vh / 1fr 50vw 1fr;
 }
 
 body
 {
     font-family: Arial, Helvetica, sans-serif;
-    user-select: none;
 }
 
 .keyboard
@@ -45,15 +36,8 @@ body
     background-color: rgb(33, 196, 182);
 }
 
-.gameScreen
+.game-screen
 {
-    grid-area: 2 / 2 / 3 / 3;
-    display: grid;
-    grid-template: 5vh 50vh 5vh 20vh / 1fr 50vw 1fr;
-    height: 100%;
-    width: 100%;
-    border-style: ridge;
-    border-color: rgb(59, 156, 82);
     background: url('../../assets/white-paper-texture.jpg');
 }
 

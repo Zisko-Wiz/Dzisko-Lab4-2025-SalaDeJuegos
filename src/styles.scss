@@ -36,3 +36,27 @@ body
   max-width: 20%;
   min-width: 20%;
 }
+
+.container-games
+{
+  user-select: none;
+  display: grid;
+  grid-template-columns: 1vw 66vw 3vw 30vw;
+  grid-template-rows: 3vh 80vh;
+}
+
+.game-screen
+{
+  grid-area: 2 / 2 / 3 / 3;
+  display: grid;
+  height: 100%;
+  width: 100%;
+  border-style: ridge;
+  border-color: #1ee4e4;
+  user-select: none;
+}
+
+.chat-screen
+{
+  grid-area: 2 / 4 / 3 / 5;
+}

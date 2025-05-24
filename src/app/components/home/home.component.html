@@ -1,4 +1,8 @@
 <app-header></app-header>
-<div class="container">
-    <input type="text" test>
+<div class="container-games">
+    <app-chat class="chat-screen"></app-chat>
+    <div class="game-screen" >
+        <button (click)="goToAhorcado()">AHORCADO</button>
+        <button (click)="goToMayorMenor()">MayorMenor</button>
+    </div>
 </div>

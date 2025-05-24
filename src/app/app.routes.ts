@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [
+export const routes: Routes =
+[
     {
         path: '',
         pathMatch: 'full',
@@ -25,5 +26,9 @@ export const routes: Routes = [
     {
         path: 'registrarse',
         loadComponent: () => import('./components/registro/registro.component').then(c => c.RegistroComponent)
-    }
+    },
+    {
+        path: '**',
+        loadComponent: () => import('./components/error/error.component').then(c => c.ErrorComponent)
+    },
 ];

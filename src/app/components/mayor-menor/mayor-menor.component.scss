@@ -1,8 +1,55 @@
 .game-screen
 {
-    width: 30vw;
-    height: 30vh;
-    border-style: solid;
-    border-color: red;
-    background-color: white;
+    grid-template: 5vh 1fr 1fr 1fr / 1fr 1fr 15vh 1fr 1fr;
+    background-color: rgb(211, 211, 211);
+    // background: url("../../assets/natural-wooden-background.jpg")
+}
+
+.score
+{
+    grid-area: 1 / 2 / 2 / 5;
+    height: 100%;
+    width: 100%;
+    border: 2px solid rgb(224, 32, 192);
+}
+
+.card1
+{
+    grid-area: 2 / 1 / 5 / 3;
+    height: 100%;
+    width: 100%;
+    border: 2px solid rgb(231, 28, 79);
+}
+
+.card2
+{
+    grid-area: 2 / 4 / 5 / 6;
+    height: 100%;
+    width: 100%;
+    border: 2px solid rgb(231, 28, 79);
+}
+
+.player-controls
+{
+    grid-area: 3 / 3 / 4 / 4;
+    height: 100%;
+    width: 100%;
+    border: 2px solid rgb(54, 38, 194);
+}
+
+.results
+{
+    grid-area: 2 / 3 / 3 / 4;
+    height: 100%;
+    width: 100%;
+    border: 2px solid rgb(80, 189, 37);
+
+}
+
+.reset
+{
+    grid-area: 4 / 3 / 5 / 4;
+    height: 100%;
+    width: 100%;
+    border: 2px solid rgb(216, 163, 18);
 }
