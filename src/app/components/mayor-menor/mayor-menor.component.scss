@@ -1,55 +1,101 @@
 .game-screen
 {
     grid-template: 5vh 1fr 1fr 1fr / 1fr 1fr 15vh 1fr 1fr;
-    background-color: rgb(211, 211, 211);
-    // background: url("../../assets/natural-wooden-background.jpg")
+    background: url("../../assets/wooden-table.jpg")
 }
 
-.score
+#score, .player-controls
+{
+    background: url("../../assets/white-paper-texture.jpg");
+}
+
+#score, .player-controls, .player-controls-buttons-area, .results, .reset
+{
+    height: 100%;
+    width: 100%;
+}
+
+.reset, .player-controls
+{
+    gap: 2px;
+}
+
+.center-item
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#score
 {
     grid-area: 1 / 2 / 2 / 5;
-    height: 100%;
-    width: 100%;
-    border: 2px solid rgb(224, 32, 192);
 }
 
-.card1
+#card1
 {
     grid-area: 2 / 1 / 5 / 3;
-    height: 100%;
-    width: 100%;
-    border: 2px solid rgb(231, 28, 79);
 }
 
-.card2
+#card2
 {
     grid-area: 2 / 4 / 5 / 6;
-    height: 100%;
-    width: 100%;
-    border: 2px solid rgb(231, 28, 79);
-}
-
-.player-controls
-{
-    grid-area: 3 / 3 / 4 / 4;
-    height: 100%;
-    width: 100%;
-    border: 2px solid rgb(54, 38, 194);
 }
 
 .results
 {
     grid-area: 2 / 3 / 3 / 4;
-    height: 100%;
-    width: 100%;
-    border: 2px solid rgb(80, 189, 37);
+}
 
+#greater-control
+{
+    grid-row: 1 / span 1;
+}
+
+#lesser-control
+{
+    grid-row: 2 / span 1;
+}
+
+.player-controls
+{
+    grid-area: 3 / 3 / 4 / 4;    display: grid;
+    grid-template-rows: 50% 50%;
+    justify-content: stretch;
+    border: 1px solid black;
+}
+
+.player-controls-buttons-area
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;}
+
+.mat-fab-custom
+{
+    background: none;
+    box-shadow: none;
+    font-size: large;
+    max-width: 10vw;
+    aspect-ratio: auto;
 }
 
 .reset
 {
-    grid-area: 4 / 3 / 5 / 4;
-    height: 100%;
-    width: 100%;
-    border: 2px solid rgb(216, 163, 18);
+    display: grid;
+    align-items: end;
+    align-content: end;
+    grid-area: 4 / 3 / 5 / 4;}
+
+.card-image
+{
+    width: 90%;
+    aspect-ratio: auto;
+    max-height: 90%;
+    object-fit: contain
+}
+
+.end-button
+{
+    background-color: #e3b790;
 }

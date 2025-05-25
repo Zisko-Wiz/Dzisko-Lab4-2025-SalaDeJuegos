@@ -5,28 +5,46 @@
 
     <div class="game-screen">
 
-        <div class="card1">
-            <p>Carta1</p>
+        <div id="card1" class="card-area, center-item">
+            <img class="card-image" src="card_back.png">
+            <p>{{this.previousCard?.code}}</p>
+        </div>
+        
+        <div id="card2" class="card-area, center-item">
+            <img class="card-image" src="card_back.png">
+            <p>{{this.drawnCard?.code}}</p>
         </div>
 
-        <div class="card2">
-            <p>carta2</p>
-        </div>
-
-        <div class="score">
-            <p>Puntaje</p>
+        <div id="score" class="center-item">
+            <h1>Puntaje: {{this.score}}</h1>
         </div>
 
         <div class="results">
             <p>resultado</p>
+            <p>{{this.remainingCards}}</p>
         </div>
 
         <div class="reset">
-            <button>Reiniciar</button>
+            <button class="end-button" mat-button (click)="this.test()">Reiniciar</button>
+            <button class="end-button" mat-button>Rendirse</button>
         </div>
 
         <div class="player-controls">
-            <p>Controles del jugador</p>
+
+            <div class="player-controls-buttons-area" id="greater-control">
+                <button class="mat-fab-custom" mat-fab extended>
+                    <mat-icon>arrow_back_ios</mat-icon>
+                    Mayor
+                </button>
+            </div>
+
+            <div class="player-controls-buttons-area" id="lesser-control">
+                <button class="mat-fab-custom" mat-fab extended>
+                    <mat-icon>arrow_forward_ios</mat-icon>
+                    Menor
+                </button>
+            </div>
+
         </div>
 
     </div>
