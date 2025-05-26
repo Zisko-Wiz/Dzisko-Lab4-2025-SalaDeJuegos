@@ -6,13 +6,22 @@
     <div class="game-screen">
 
         <div id="card1" class="card-area, center-item">
-            <img class="card-image" src="card_back.png">
-            <p>{{this.previousCard?.code}}</p>
+            @if (!this.started)
+            {
+                <img class="card-image" src="card_back.png">
+            } @else {
+                <img class="card-image" src="{{this.previousCard?.image}}">
+            }
         </div>
         
         <div id="card2" class="card-area, center-item">
-            <img class="card-image" src="card_back.png">
-            <p>{{this.drawnCard?.code}}</p>
+
+            @if (!this.cardVisible)
+            {
+                <img class="card-image" src="card_back.png">
+            } @else {
+                <img class="card-image" src="{{this.drawnCard?.image}}">
+            }
         </div>
 
         <div id="score" class="center-item">
@@ -20,31 +29,61 @@
         </div>
 
         <div class="results">
-            <p>resultado</p>
-            <p>{{this.remainingCards}}</p>
+            @if (!this.started)
+            {
+                <button id="start-button" class="end-button" mat-button (click)="this.startNewGame()">Empezar</button>
+            } @else {
+                @if (this.lives > 2 ) 
+                {
+                    <img class="heart" src="heart.png">
+                }
+                @if (this.lives > 1) 
+                {
+                    <img class="heart" src="heart.png">
+                }
+                @if (this.lives > 0) 
+                {
+                    <img class="heart" src="heart.png">
+                }
+            }
         </div>
 
         <div class="reset">
-            <button class="end-button" mat-button (click)="this.test()">Reiniciar</button>
-            <button class="end-button" mat-button>Rendirse</button>
+            @if (this.started)
+            {
+                <button class="end-button" mat-button (click)="this.test()">Reiniciar</button>
+                <button class="end-button" mat-button>Rendirse</button>
+            }
         </div>
 
-        <div class="player-controls">
+        <div class="player-controls"
+        [style.pointer-events]=" (this.canPlay) ? 'none' : 'auto' ">
 
-            <div class="player-controls-buttons-area" id="greater-control">
-                <button class="mat-fab-custom" mat-fab extended>
-                    <mat-icon>arrow_back_ios</mat-icon>
-                    Mayor
-                </button>
-            </div>
-
-            <div class="player-controls-buttons-area" id="lesser-control">
-                <button class="mat-fab-custom" mat-fab extended>
-                    <mat-icon>arrow_forward_ios</mat-icon>
-                    Menor
-                </button>
-            </div>
-
+            @if (this.started)
+            {
+                <div class="player-controls-buttons-area" id="greater-control">
+                    
+                    <button mat-fab extended
+                        [class.mat-fab-custom]="this.mayorCorrect == 0"
+                        [class.mat-fab-wrong]="this.mayorCorrect == 1"
+                        [class.mat-fab-correct]="this.mayorCorrect == 2"
+                        (click)="this.optionSelected('mayor')" >
+                        <mat-icon>arrow_back_ios</mat-icon>
+                        Mayor
+                    </button>
+                </div>
+    
+                <div class="player-controls-buttons-area" id="lesser-control">
+                    <button mat-fab extended
+                        [class.mat-fab-custom]="this.menorCorrect == 0"
+                        [class.mat-fab-correct]="this.menorCorrect == 1"
+                        [class.mat-fab-wrong]="this.menorCorrect == 2"
+                        (click)="this.optionSelected('menor')" >
+                        <mat-icon>arrow_forward_ios</mat-icon>
+                        Menor
+                    </button>
+                </div>
+            }
         </div>
 
     </div>

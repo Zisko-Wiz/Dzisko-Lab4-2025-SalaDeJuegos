@@ -9,9 +9,9 @@ export class DeckService {
 
   constructor(private http: HttpClient) { }
 
-  public getDeck()
+  public getDeck(deckCount: string = "1")
   {
-    return this.http.get<Deck>("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1");
+    return this.http.get<Deck>(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=${deckCount}`);
   }
 
   public drawCard(id: string, count: string)

@@ -71,13 +71,26 @@
     align-items: center;
     justify-content: center;}
 
-.mat-fab-custom
+.mat-fab-custom,.mat-fab-correct,.mat-fab-wrong
 {
-    background: none;
     box-shadow: none;
     font-size: large;
     max-width: 10vw;
     aspect-ratio: auto;
+}
+
+.mat-fab-custom
+{
+    background: none;
+}
+.mat-fab-correct
+{
+    background-color: green;
+}
+
+.mat-fab-wrong
+{
+    background-color: red;
 }
 
 .reset
@@ -95,7 +108,27 @@
     object-fit: contain
 }
 
+.heart
+{
+    grid-row: 4 / 5;
+    aspect-ratio: auto;
+    width: 3vw;
+}
+
 .end-button
 {
     background-color: #e3b790;
+}
+
+.results
+{
+    display: grid;
+    grid-template-rows: repeat(4 1fr);
+}
+
+#start-button
+{
+    height: 100%;
+    font-size: xx-large;
+    background-color: #f27474;
 }
