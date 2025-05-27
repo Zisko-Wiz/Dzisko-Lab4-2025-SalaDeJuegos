@@ -23,7 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class MayorMenorComponent implements OnInit, OnDestroy
 {
-  private deck?: Deck;
+  protected deck?: Deck;
   private discardPile? : Deck;
   protected remainingCards: number = 50;
   private deckSubscription!: Subscription;
@@ -37,6 +37,7 @@ export class MayorMenorComponent implements OnInit, OnDestroy
   protected mayorCorrect: number = 0;
   protected menorCorrect: number = 0;
   protected lives: number = 3;
+  protected giveUp: boolean = false;
 
   constructor(private http: HttpClient, private deckService: DeckService){}
 
@@ -94,6 +95,8 @@ export class MayorMenorComponent implements OnInit, OnDestroy
           this.previousCard = this.drawnCard;
           this.drawnCard = data.cards[0];
           this.addToDiscard(data.cards[0].code);
+          console.log(data.cards[0].code);
+          
         }
 
         this.remainingCards = data.remaining;
@@ -233,12 +236,31 @@ export class MayorMenorComponent implements OnInit, OnDestroy
         break
     }
 
-    setTimeout(()=>{this.drawNewCard()}, 2000);
+    setTimeout(()=>{this.drawNewCard();
+    }, 2000);
 
+    console.log(this.remainingCards);
   }
-
-  public test()
+  
+  private reshuffleDeck()
   {
-    console.log(this.deck);
+    this.deckSubscription = this.deckService.reshuffleDeck(this.deck?.deck_id!).subscribe(
+    {
+      next: (data: Deck) => 
+      {
+        this.remainingCards = data.remaining;
+        this.started = false;
+      }
+    }
+    )
   }
+
+  protected reset()
+  {
+    this.score = 0;
+    this.lives = 3;
+    this.giveUp = false;
+    this.reshuffleDeck();
+  }
+
 }

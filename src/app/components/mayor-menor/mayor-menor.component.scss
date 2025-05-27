@@ -1,7 +1,7 @@
 .game-screen
 {
     grid-template: 5vh 1fr 1fr 1fr / 1fr 1fr 15vh 1fr 1fr;
-    background: url("../../assets/wooden-table.jpg")
+    background: url("../../assets/wooden-table.jpg");
 }
 
 #score, .player-controls
@@ -131,4 +131,16 @@
     height: 100%;
     font-size: xx-large;
     background-color: #f27474;
+}
+
+#game-over
+{
+    grid-area: 1 / 1 / 5 / 6;
+    display: flex;
+    z-index: 300;
+    height: 89%;
+    aspect-ratio: auto;
+    align-self: center;
+    justify-self: center;
+    margin: 0;
 }

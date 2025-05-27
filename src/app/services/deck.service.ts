@@ -23,4 +23,9 @@ export class DeckService {
   {
     return this.http.get<Deck>(`https://deckofcardsapi.com/api/deck/${deckId}/pile/${pileName}/add/?cards=${cards}`);
   }
+
+  public reshuffleDeck(id: string)
+  {
+    return this.http.get<Deck>(`https://deckofcardsapi.com/api/deck/${id}/shuffle/`);
+  }
 }

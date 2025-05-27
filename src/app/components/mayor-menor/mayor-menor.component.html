@@ -5,6 +5,11 @@
 
     <div class="game-screen">
 
+        @if (this.lives == 0 || this.remainingCards == 0 || this.giveUp == true)
+        {
+            <img id="game-over" src="game-over.png">
+        }
+
         <div id="card1" class="card-area, center-item">
             @if (!this.started)
             {
@@ -51,13 +56,17 @@
         <div class="reset">
             @if (this.started)
             {
-                <button class="end-button" mat-button (click)="this.test()">Reiniciar</button>
-                <button class="end-button" mat-button>Rendirse</button>
+                <button class="end-button" mat-button
+                (click)="this.giveUp = true">Rendirse</button>
+
+                <button class="end-button" mat-button
+                (click)="this.reset()">Reiniciar</button>
             }
         </div>
 
         <div class="player-controls"
         [style.pointer-events]=" (this.canPlay) ? 'none' : 'auto' ">
+
 
             @if (this.started)
             {
