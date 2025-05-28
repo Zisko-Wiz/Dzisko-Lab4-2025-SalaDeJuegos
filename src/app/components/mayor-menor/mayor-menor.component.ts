@@ -49,10 +49,7 @@ export class MayorMenorComponent implements OnInit, OnDestroy
   public ngOnDestroy(): void
   {
     this.deckSubscription.unsubscribe();
-    if (this.pileSubscription != undefined)
-    {
-      this.pileSubscription.unsubscribe();
-    }
+    this.pileSubscription?.unsubscribe();
   }
 
   private getDeck()

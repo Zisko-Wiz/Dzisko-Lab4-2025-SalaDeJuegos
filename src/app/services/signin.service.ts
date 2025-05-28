@@ -1,27 +1,33 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { SupaService } from './supa.service';
-import { Usuario } from '../models/usuario.models';
+import { User } from '@supabase/supabase-js';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SigninService {
-  public user: Usuario;
-  public emitter = new EventEmitter<Usuario>()
+  public isLogged: boolean = false;
+  public user?: User;
+  public emitter = new EventEmitter<User>();
 
   constructor(private supaService: SupaService)
   {
-    this.user = new Usuario("");
   }
 
   public getUser()
   {
     this.supaService.supabase.auth.getUser().then(({data}) =>
     { 
-      if (data.user?.email != undefined)
+      if (data.user != null)
       {
-        this.user.email = data.user?.email;
-        this.emitter.emit(this.user);
+        this.user = data.user;
+        this.isLogged = true;
+        this.emitter.emit(data.user);
+      }
+      else
+      {
+        this.isLogged = false;
+        this.emitter.emit(undefined);
       }
     });
   }

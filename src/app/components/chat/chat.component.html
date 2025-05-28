@@ -1,3 +1,44 @@
 <div class="chat-screen">
-    <h1>Acá va el chat</h1>
+
+    @if (this.signed.isLogged)
+    {
+        <div class="autoscrollable-wrapper">
+                @for (item of this.allMessages; track item.id)
+                {
+                    @if (item.users.uid == this.signed.user?.id)
+                    {
+                        <div
+                        class="message-right">
+                            <h3>{{this.capitalizeNickname(item.users.nickname)}}</h3>
+                            <h6>{{this.formatDate(item.created_at)}}</h6>
+                            <p >{{item.content}}</p>
+                        </div>
+                    } @else {
+                        <div
+                        class="message-left">
+                            <h3>{{this.capitalizeNickname(item.users.nickname)}}</h3>
+                            <h6>{{this.formatDate(item.created_at)}}</h6>
+                            <p >{{item.content}}</p>
+                        </div>
+                    }
+                }
+        </div>
+
+        <div id="chat-input-zone">
+            <textarea [(ngModel)]='this.newMessage'
+            class="textarea"
+            role="textbox"
+            matInput placeholder="Escribe un mensaje"
+            id="chat-input"
+            spellcheck="false"
+            ></textarea>
+            <button class="mat-flat-button-custom" mat-flat-button (click)="this.sendMessage()">Enviar</button>
+        </div>
+
+    } @else {
+        <div class="disabled-chat">
+            <h1>Ingresá con tu cuenta para acceder al chat</h1>
+        </div>
+    }
+
 </div>

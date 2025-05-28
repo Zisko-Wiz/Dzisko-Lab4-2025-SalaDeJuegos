@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { SupaService } from '../../services/supa.service';
 import { SigninService } from '../../services/signin.service';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { User } from '@supabase/supabase-js';
 import { Usuario } from '../../models/usuario.models';
 
 @Component({
@@ -17,13 +18,13 @@ export class HeaderComponent implements OnInit, OnDestroy
   public ingreso: Boolean = false;
   public mensajeBienvenida? : string = '';
   public subscription!: Subscription;
-
+  public logginEmmiter = new EventEmitter<boolean>();
   constructor( private router: Router, private supa: SupaService, protected signInService: SigninService){}
 
   ngOnInit(): void
   {
-    this.signInService.getUser();
     this.getUser();
+    this.signInService.getUser();
   }
 
   ngOnDestroy(): void
@@ -41,7 +42,7 @@ export class HeaderComponent implements OnInit, OnDestroy
     this.router.navigate(['registrarse']);
   }
 
-  public logOut()
+  public async logOut()
   {
     this.supa.supabase.auth.signOut().then(({ error }) =>
     {
@@ -49,10 +50,13 @@ export class HeaderComponent implements OnInit, OnDestroy
       {
         console.error('Error: ', error.message)
       }else{
+        this.signInService.getUser();
         this.ingreso = false;
         this.mensajeBienvenida = "";
       }
     });
+
+    
   }
 
   public getUser()
@@ -60,17 +64,29 @@ export class HeaderComponent implements OnInit, OnDestroy
     this.subscription = this.signInService.emitter
     .subscribe(
     {
-      next: (data: Usuario) =>
+      next: (data: User) =>
       {
-        if (data.email != "")
+        if (data != undefined)
         {
-          let nombre: string  = data.email.replace(/\@+(.+)/, "");
-          let nombreCapitalized: string = nombre[0].toUpperCase() + nombre.slice(1);
-          this.mensajeBienvenida = "Bienvenido " + nombreCapitalized;
           this.ingreso = true;
+          this.setWelcomeMessage();
         }
       }
     })
+  }
+
+  private async setWelcomeMessage()
+  {
+    if (this.signInService.user != undefined)
+    {
+      const { data, error } = (await this.supa.supabase.from('users')
+      .select('nickname')
+      .eq('uid',this.signInService.user?.id));
+
+      let nick = data![0].nickname;
+      let nombreCapitalized: string = nick![0].toUpperCase() + nick!.slice(1);
+      this.mensajeBienvenida = "Bienvenido " + nombreCapitalized;
+    }
   }
 
   public goToHome()

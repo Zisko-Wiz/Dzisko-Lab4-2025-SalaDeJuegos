@@ -1,9 +1,6 @@
-export class Usuario
+export interface Usuario
 {
     email: string;
-
-    constructor(email:string)
-    {
-        this.email = email;
-    }
+    id: string;
+    nickname: string;
 }

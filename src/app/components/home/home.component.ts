@@ -6,7 +6,8 @@ import { ChatComponent } from '../chat/chat.component';
 @Component({
   selector: 'app-home',
   imports:
-  [ HeaderComponent,
+  [ 
+    HeaderComponent,
     ChatComponent
   ],
   templateUrl: './home.component.html',

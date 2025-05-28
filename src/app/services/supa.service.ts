@@ -10,5 +10,4 @@ export class SupaService
 {
   supabase = createClient(environment.apiUrl, environment.publicAnonKey)
 
-  constructor() { }
 }
