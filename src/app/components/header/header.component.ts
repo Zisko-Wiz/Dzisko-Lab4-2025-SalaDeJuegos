@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit, OnDestroy
     this.router.navigate(['login']);
   }
 
-  public goToRegister()
+  public goToSignUp()
   {
     this.router.navigate(['registrarse']);
   }

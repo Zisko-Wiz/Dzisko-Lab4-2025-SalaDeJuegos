@@ -20,7 +20,7 @@ export const routes: Routes =
         loadComponent: () => import('./components/home/home.component').then(c => c.HomeComponent)
     },
     {
-        path: 'quienSoy',
+        path: 'quien-soy',
         loadComponent: () => import('./components/about/about.component').then(c => c.AboutComponent)
     },
     {

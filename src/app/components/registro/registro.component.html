@@ -1,6 +1,6 @@
     <div class="form-container">
         <img src="icon.png" alt="logo" class="logo">
-        <p>Registrarse</p>
+        <p>Registrarse no disponible</p>
         <p style="color: red; padding-bottom: 5px;" *ngIf="errorUsuarioExiste" >*El correo ya está registrado</p>
         <p style="color: red; padding-bottom: 5px;" *ngIf="errorWeakPass" >*La contraseña debe tener al menos 6 carácteres</p>
         <mat-form-field>
@@ -22,5 +22,5 @@
                 [(ngModel)]="password"
                 [formControl]="passwordFormControl">
         </mat-form-field>
-            <button mat-flat-button (click)="registrar()">Confirmar</button>
+            <button mat-flat-button>Confirmar</button>
     </div>

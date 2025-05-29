@@ -10,7 +10,14 @@ import { SupaService } from '../../services/supa.service';
 
 @Component({
   selector: 'app-login',
-  imports: [ FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, CommonModule],
+  imports:
+  [
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    CommonModule
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -26,6 +33,11 @@ export class LoginComponent
   goToRegistrarse()
   {
     this.router.navigate(['/registrarse']);
+  }
+
+  goToHome()
+  {
+    this.router.navigate(['/']);
   }
 
   login()
