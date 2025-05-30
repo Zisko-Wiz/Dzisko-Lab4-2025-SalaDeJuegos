@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { canActivateJuegosGuard } from './guards/can-activate-juegos.guard';
 
 export const routes: Routes =
 [
