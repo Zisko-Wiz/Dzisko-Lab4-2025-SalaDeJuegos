@@ -8,8 +8,12 @@ const routes: Routes =
     loadComponent: () => import('../../components/ahorcado/ahorcado.component').then(c => c.AhorcadoComponent)
   },
   {
-    path: 'mayorMenor',
+    path: 'mayor-menor',
     loadComponent: () => import('../../components/mayor-menor/mayor-menor.component').then(c => c.MayorMenorComponent)
+  },
+  {
+    path: 'scoundrel',
+    loadComponent: () => import('../../components/scoundrel/scoundrel.component').then(c => c.ScoundrelComponent)
   }
 ];
 

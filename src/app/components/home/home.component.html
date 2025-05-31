@@ -2,7 +2,9 @@
 <div class="container-games">
     <app-chat class="chat-screen"></app-chat>
     <div class="game-screen" >
-        <button (click)="goToAhorcado()">AHORCADO</button>
-        <button (click)="goToMayorMenor()">MayorMenor</button>
+        <button routerLink="/juegos/ahorcado">Ahorcado</button>
+        <button routerLink="/juegos/mayor-menor">MayorMenor</button>
+        <button>Preguntados</button>
+        <button routerLink="/juegos/scoundrel">Scoundrel</button>
     </div>
 </div>

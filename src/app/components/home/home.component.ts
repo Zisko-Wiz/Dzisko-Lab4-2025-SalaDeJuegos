@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ChatComponent } from '../chat/chat.component';
 
 @Component({
@@ -8,7 +8,8 @@ import { ChatComponent } from '../chat/chat.component';
   imports:
   [ 
     HeaderComponent,
-    ChatComponent
+    ChatComponent,
+    RouterLink
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
