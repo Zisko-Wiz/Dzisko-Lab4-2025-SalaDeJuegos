@@ -92,8 +92,6 @@ export class MayorMenorComponent implements OnInit, OnDestroy
           this.previousCard = this.drawnCard;
           this.drawnCard = data.cards[0];
           this.addToDiscard(data.cards[0].code);
-          console.log(data.cards[0].code);
-          
         }
 
         this.remainingCards = data.remaining;
@@ -121,22 +119,12 @@ export class MayorMenorComponent implements OnInit, OnDestroy
     setTimeout(()=>{this.canPlay = false}, 2000);
   }
 
-  private isNumber(str: string) : boolean
-  {
-    if (str.search(/^\d+$/)! >= 0)
-    {
-      return true
-    }
-
-    return false;
-  }
-
   private checkResults() : number
   {
     let previousCardValue: number = -1;
     let drawnCardValue: number = -1;
 
-    if (!this.isNumber(this.previousCard?.value!))
+    if (!this.deckService.isNumber(this.previousCard?.value!))
     {
       switch (this.previousCard?.value)
       {
@@ -161,7 +149,7 @@ export class MayorMenorComponent implements OnInit, OnDestroy
       previousCardValue = parseInt(this.previousCard?.value!);
     }
 
-    if (!this.isNumber(this.drawnCard?.value!))
+    if (!this.deckService.isNumber(this.drawnCard?.value!))
     {
       switch (this.drawnCard?.value)
       {
@@ -235,8 +223,6 @@ export class MayorMenorComponent implements OnInit, OnDestroy
 
     setTimeout(()=>{this.drawNewCard();
     }, 2000);
-
-    console.log(this.remainingCards);
   }
   
   private reshuffleDeck()

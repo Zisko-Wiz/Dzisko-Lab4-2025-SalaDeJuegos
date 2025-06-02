@@ -7,6 +7,7 @@ export interface Deck
     cards: Card[];
     shuffled: boolean;
     remaining: number;
-    pile: Deck[];
-
+    piles: Deck;
+    room: Deck;
+    hand: Deck;
 }

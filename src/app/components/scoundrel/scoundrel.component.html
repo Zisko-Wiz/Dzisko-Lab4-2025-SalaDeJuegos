@@ -3,39 +3,76 @@
 
     <app-chat class="chat-screen"></app-chat>
 
-    <div class="game-screen">
+    <div class="game-screen"
+    [style.pointer-events]=" (this.canPlay) ? 'none' : 'auto' ">
+
+        @if (!this.started)
+        {
+            <div id="start-screen">
+                <button mat-button class="start-button" (click)="startNewGame()">Empezar</button>
+            </div>
+        }
 
         <div id="room">
             
-            <div class="room-card">
-                <img class="card" src="card_back.png">
-                <button class="mat-button-custom" mat-button>ataque sin armas</button>
-                <button class="mat-button-custom" mat-button>ataque con armas</button>
-            </div>
+            @if (!this.started)
+            {
 
-            <div class="room-card">
-                <img class="card" src="card_back.png">
-                <button class="mat-button-custom" mat-button>ataque sin armas</button>
-                <button class="mat-button-custom" mat-button>ataque con armas</button>
-            </div>
-            
-            <div class="room-card">
-                <img class="card" src="card_back.png">
-                <button class="mat-button-custom" mat-button>ataque sin armas</button>
-                <button class="mat-button-custom" mat-button>ataque con armas</button>
-            </div>
+                <div class="room-card">
+                    <img class="card" src="card_back.png">
+                    <button class="mat-button-custom" mat-button>ataque sin armas</button>
+                    <button class="mat-button-custom" mat-button>ataque con armas</button>
+                </div>
+    
+                <div class="room-card">
+                    <img class="card" src="card_back.png">
+                    <button class="mat-button-custom" mat-button>ataque sin armas</button>
+                    <button class="mat-button-custom" mat-button>ataque con armas</button>
+                </div>
+                
+                <div class="room-card">
+                    <img class="card" src="card_back.png">
+                    <button class="mat-button-custom" mat-button>ataque sin armas</button>
+                    <button class="mat-button-custom" mat-button>ataque con armas</button>
+                </div>
+    
+                <div class="room-card">
+                    <img class="card" src="card_back.png">
+                    <button class="mat-button-custom" mat-button>ataque sin armas</button>
+                    <button class="mat-button-custom" mat-button>ataque con armas</button>
+                </div>
+            } @else {
+                @for (card of this.roomPile?.cards; track $index)
+                {
+                    <div class="room-card">
+                        <img class="card" src="{{card.image}}" >
 
-            <div class="room-card">
-                <img class="card" src="card_back.png">
-                <button class="mat-button-custom" mat-button>ataque sin armas</button>
-                <button class="mat-button-custom" mat-button>ataque con armas</button>
-            </div>
+                        @if (this.isRed(card.code))
+                        {
+                            @if (this.isDiamond(card.code))
+                            {
+                                <button class="mat-button-custom" mat-button (click)="this.equipWeapon(card.code)">Equipar</button>
+                            } @else {
+                                <button class="mat-button-custom" mat-button>Usar</button>
+                            }
+                            <button class="mat-button-invisible" mat-button></button>
+                        } @else {
+                            <button class="mat-button-custom" mat-button (click)="this.attack(card.code, card.value)">ataque sin armas</button>
+                            <button class="mat-button-custom" mat-button
+                            [class.disabled-button]="!this.isWeaponEquipped"
+                            [class.disabled-button]="this.lastMonsterKilled != undefined && this.deckService.getCardValue(this.lastMonsterKilled!.value) > 1 && this.deckService.getCardValue(this.lastMonsterKilled!.value) < this.deckService.getCardValue(card.value)"
+                            (click)="this.attack(card.code, card.value, true)">ataque con armas</button>
+                        }
+
+                    </div>
+                }
+            }
 
         </div>
 
         <div id="lives">
             <img id="heart" src="heart.png">
-            <h1>20/20</h1>
+            <h1>{{this.lifePoints}}/20</h1>
         </div>
 
         <div id="flee">
@@ -45,23 +82,36 @@
         <div id="hand">
             <div id="weapon">
                 <h1>Arma</h1>
-                <img class="hand-card" src="blank-card.png">
+                @if (this.isWeaponEquipped)
+                {
+                    <img class="hand-card" src="{{this.handPile!.cards[0].image}}">
+                } @else {
+                    <img class="hand-card" src="blank-card.png">
+                }
             </div>
-
+            
             <div id="monster">
                 <h1>Monstruo</h1>
-                <img class="hand-card" src="blank-card.png">
+                @if (this.lastMonsterKilled == undefined)
+                {
+                    <img class="hand-card" src="blank-card.png">
+                } @else {
+                    <img class="hand-card" src="{{this.lastMonsterKilled.image}}">
+                }
             </div>
         </div>
 
         <div id="score">
             <h1>Puntaje</h1>
-            <h2>0</h2>
+            <h2>{{this.score}}</h2>
         </div>
 
         <div id="end-buttons">
             <button mat-button class="mat-button-custom">Rendirse</button>
-            <button mat-button class="mat-button-custom">Reiniciar</button>
+
+            <button mat-button
+            class="mat-button-custom"
+            (click)="this.reset()">Reiniciar</button>
         </div>
     </div>
 </div>

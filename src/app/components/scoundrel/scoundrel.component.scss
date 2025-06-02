@@ -41,6 +41,36 @@ h1
     background-color: azure;
 }
 
+.start-button
+{
+    background-color: #ec7171;
+    height: 30%;
+    width: 30%;
+}
+
+.mat-button-invisible
+{
+    pointer-events: none;
+}
+
+.disabled-button
+{
+    background-color: grey;
+    pointer-events: none;
+}
+
+#start-screen
+{
+    grid-area: 1 / 1 / 4 / 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    z-index: 500;
+}
+
 #heart
 {
     height: 10vh;
