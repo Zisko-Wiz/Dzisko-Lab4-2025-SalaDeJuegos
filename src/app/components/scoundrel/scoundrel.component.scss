@@ -144,3 +144,28 @@ h1
 {
     height: 40%;
 }
+
+#game-over-screen
+{
+    grid-area: 1 / 1 / 4 / 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 300;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+}
+
+#game-over
+{
+    display: flex;
+    height: 89%;
+    aspect-ratio: auto;
+    margin: 0;
+}
+
+#reset-button
+{
+    z-index: 310;
+}

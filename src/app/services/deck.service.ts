@@ -35,6 +35,11 @@ export class DeckService
     return this.http.get<Deck>(`https://deckofcardsapi.com/api/deck/${deckId}/pile/${pileName}/add/?cards=${cardsCodes}`);
   }
 
+  public returnPileCardsToDeck(deckId: string, pileName: string)
+  {
+    return this.http.get<Deck>(`https://deckofcardsapi.com/api/deck/${deckId}/pile/${pileName}/return/`);
+  }
+
   public reshuffleDeck(id: string)
   {
     return this.http.get<Deck>(`https://deckofcardsapi.com/api/deck/${id}/shuffle/`);
@@ -55,13 +60,17 @@ export class DeckService
     return false;
   }
 
-  public getCardValue(cardValue: string):  number
+  public getCardValue(cardValue: string, altValues: boolean = false):  number
   {
     if (!this.isNumber(cardValue))
     {
       switch (cardValue)
       {
         case "ACE":
+          if (altValues)
+          {
+            return 14  
+          }
           return 1;
 
         case "KING":

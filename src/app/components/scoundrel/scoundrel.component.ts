@@ -23,10 +23,14 @@ export class ScoundrelComponent implements OnInit, OnDestroy
   protected canPlay: boolean = false;
   protected started: boolean = false;
   protected giveUp: boolean = false;
+  protected gameOver: boolean = false;
   protected score: number = 0;
   protected lifePoints: number = 20;
   protected isWeaponEquipped: boolean = false;
-  protected lastMonsterKilled?: Card;
+  private isPotionConsumed: boolean = false;
+  protected hasFled: boolean = false;
+  protected lastMonsterKilledCode: string = "";
+  protected lastMonsterKilledValue: number = 0;
   protected equipedWeapon?: Card;
   protected deck?: Deck;
   private deckSubscription?: Subscription;
@@ -44,7 +48,6 @@ export class ScoundrelComponent implements OnInit, OnDestroy
 
   ngOnInit(): void
   {
-    this.disablePlayerInput();
     this.getDeck();
   }
 
@@ -64,6 +67,10 @@ export class ScoundrelComponent implements OnInit, OnDestroy
         next: (data: Deck) => 
         {
           this.deck = data;
+        },
+        complete: () =>
+        {
+          this.canPlay = true;
         }
       }
     )
@@ -81,22 +88,29 @@ export class ScoundrelComponent implements OnInit, OnDestroy
     })
   }
 
-  private async discardFromPile(pileSubscription: Subscription | undefined, pileName: string, cardsCodes: string)
+  private discardFromPile(pileSubscription: Subscription | undefined, pileName: string, cardsCodes: string,checkRoom:boolean = true, altCardCode: string = "")
   {
     pileSubscription = this.deckService.drawFromPile(this.deck!.deck_id, pileName, cardsCodes).subscribe(
+    {
+      next: (data: Deck) => 
       {
-        next: (data: Deck) => 
+        for (let index = 0; index < data.cards.length; index++)
         {
-          for (let index = 0; index < data.cards.length; index++)
-          {
-            this.addToPile(pileSubscription, "discard", data.cards[index].code);
-          }
+          this.addToPile(pileSubscription, "discard", data.cards[index].code, true);
+        }
+      },
+      complete: () =>
+      {
+        if (pileName == "hand")
+        {
+          this.addToPile(this.handSubscription, "hand", altCardCode, false);  
         }
       }
+    }
     )
   }
 
-  private addToPile(pileSubscription: Subscription | undefined, pileName: string, cardsCodes: string)
+  private addToPile(pileSubscription: Subscription | undefined, pileName: string, cardsCodes: string, checkRoom: boolean = true)
   {
     pileSubscription = this.deckService.addToPile(this.deck?.deck_id!, pileName, cardsCodes).subscribe(
     {
@@ -106,9 +120,30 @@ export class ScoundrelComponent implements OnInit, OnDestroy
         {
           this.getPile(pileSubscription, pileName);          
         }
-          this.getPile(this.roomSubscription, "room");
+
+        if (checkRoom)
+        {
+          this.getPile(this.roomSubscription, "room");          
+        }
       }
     }
+    )
+  }
+
+  private returnPile(pileSubscription: Subscription | undefined, pileName: string)
+  {
+    pileSubscription = this.deckService.returnPileCardsToDeck(this.deck?.deck_id!, pileName).subscribe(
+    {
+      next: () =>
+      {
+        this.getPile(pileSubscription, pileName);
+      },
+      complete: () =>
+      {
+        this.drawNewCard("4");
+        this.score += 1;
+      }
+    } 
     )
   }
 
@@ -123,22 +158,28 @@ export class ScoundrelComponent implements OnInit, OnDestroy
           case "room":
             this.roomPile = data.piles.room;
             break;
-
-          case "hand":
-            this.handPile = data.piles.hand;
-            this.isWeaponEquipped = true;
-            console.log(data.piles.hand);
             
-            if (this.handPile.cards.length == 2)
-            {
-              this.lastMonsterKilled = this.handPile.cards.find( (card) => { return card.suit != "DIAMONDS";
-              } );
+            case "hand":
+              this.handPile = data.piles.hand;
+              console.log(this.handPile);
               
-            }
+              this.isWeaponEquipped = true;
+          break;
+        }
+      },
+      complete: () =>
+      {
+        this.canPlay = true;
 
+        switch (pileName) {
+          case "room":
+            this.checkRoom();
+            break;
+        
+          default:
             break;
         }
-      }
+      }      
     }
     )
   }
@@ -147,19 +188,19 @@ export class ScoundrelComponent implements OnInit, OnDestroy
   {
     let cards: string[] = [];
 
-    for (let index = 0; index < this.deck?.cards.length!; index++)
+    for (let index = 0; index < deck.cards.length!; index++)
     {
       cards.push(deck.cards[index].code);
     }
-
+    
     return cards;
   }
 
   protected drawNewRoom()
   {
     let count: string;
-    
-    if (this.roomPile?.cards == undefined)
+
+    if (this.roomPile == undefined)
     {
       count = "4";  
     } else {
@@ -167,12 +208,16 @@ export class ScoundrelComponent implements OnInit, OnDestroy
       count = String(c);
     }
 
-    this.drawNewCard(count);
+    if (Number(count) < this.deck?.remaining!)
+    {
+      this.drawNewCard(count);
+    } else {
+      this.drawNewCard(String(this.deck?.remaining));
+    }
   }
 
   protected startNewGame()
   {
-    this.disablePlayerInput();
     this.started = true;
     this.drawNewRoom();
   }
@@ -203,65 +248,100 @@ export class ScoundrelComponent implements OnInit, OnDestroy
 
   protected attack(cardCode: string, cardValue:string, useWeapon: boolean = false)
   {
-    let damage: number = this.deckService.getCardValue(cardValue);
-
-    this.disablePlayerInput();
-
-    if(damage == 1)
-    {
-      damage = 14;
-    }
+    this.canPlay = false;
+    let damage: number = this.deckService.getCardValue(cardValue, true);
 
     if (useWeapon)
     {
-      let weaponValue = this.deckService.getCardValue(this.handPile!.cards.find( (card) => { return this.isDiamond(card.code)} )!.value);
+      let weaponValue = this.deckService.getCardValue(this.handPile!.cards.find( (card) => { return this.isDiamond(card.code)} )!.value, true);
       
       if (weaponValue < damage)
       {
         this.lifePoints -= (damage - weaponValue)
       }
-      this.killMonster(cardCode,cardValue ,true);
+      this.killMonster(cardCode, true);
     } else {
       this.lifePoints -= damage;
-      this.killMonster(cardCode, cardValue);
+      this.killMonster(cardCode);
     }
   }
 
-  protected killMonster(cardCode: string, cardValue:string, useWeapon: boolean = false)
+  protected killMonster(cardCode: string, useWeapon: boolean = false)
   {
     if (useWeapon)
     {
-      if (this.handPile?.cards.length! < 2 )          
-      {
-        this.addToPile(this.handSubscription, "hand", cardCode);
-      } else
-      {
-        this.discardFromPile(this.discardSubscription, "hand", this.lastMonsterKilled?.code!)
-        .then( () => { this.addToPile(this.handSubscription, "hand", cardCode); } );
-      }
+      this.addToPile(this.handSubscription, "hand", cardCode);
+      this.lastMonsterKilledCode = cardCode;
     } else{
-      this.addToPile(this.discardSubscription, "discard", cardCode);
+      this.discardFromPile(this.roomSubscription, "room", cardCode);
     }
   }
 
-  protected equipWeapon(cardCode: string)
+  private checkRoom() : void
+  { 
+    if (this.roomPile != undefined && this.roomPile.cards.length == 1)
+    {
+      this.canPlay = false;
+      this.isPotionConsumed = false;
+      this.hasFled = false;
+      this.score += 1;
+
+      if (this.deck?.remaining! <= 0)
+      {
+        this.gameOver = true;  
+      } else if (this.roomPile.cards.length < 4)
+      {
+        this.drawNewRoom();
+      }
+
+    }
+  }
+
+  protected equipWeapon(cardCode: string) 
   {
-    this.disablePlayerInput();
-    this.lastMonsterKilled = undefined;
+    this.canPlay = false;
 
     if(this.isWeaponEquipped)
     {
       this.isWeaponEquipped = false;
-      this.addToPile(this.discardSubscription, "discard", this.handPile!.cards.find( (card) => { return this.isDiamond(card.code)} )!.code);
-      if (this.lastMonsterKilled != undefined)
+      
+      if (this.handPile?.cards.length === 1)
       {
-        this.addToPile(this.discardSubscription, "discard", this.handPile!.cards.find( (card) => { return !this.isDiamond(card.code)} )!.code);  
-        this.lastMonsterKilled = undefined;
+        this.discardFromPile(this.handSubscription, "hand", this.handPile.cards[0].code, true, cardCode)
+      } else {
+        this.discardFromPile(this.handSubscription, "hand", this.getListOfCards(this.handPile!).join(","), true, cardCode );
       }
-      this.handPile!.cards.length = 0;
+      
+    } else
+    {
+      this.addToPile(this.handSubscription, "hand", cardCode);
+    }
+  }
+
+  protected drinkPotion(cardCode: string, cardValue: string)
+  {
+    this.canPlay = false;
+    if (!this.isPotionConsumed)
+    {
+      var potionValue = this.deckService.getCardValue(cardValue, true);
+      
+      this.isPotionConsumed = true;
+      
+      if ( (potionValue + this.lifePoints) > 20)
+      {
+        this.lifePoints = 20;  
+      } else {
+        this.lifePoints += potionValue;
+      }
     }
 
-    this.addToPile(this.handSubscription, "hand", cardCode);
+    this.discardFromPile(this.roomSubscription, "room", cardCode);
+  }
+
+  protected flee()
+  {
+    this.hasFled = true;
+    this.returnPile(this.roomSubscription, "room");    
   }
 
   private reshuffleDeck()
@@ -276,26 +356,27 @@ export class ScoundrelComponent implements OnInit, OnDestroy
     )
   }
 
+  protected giveUpGame()
+  {
+    this.giveUp = true;
+  }
+
   protected reset()
   {
-    this.disablePlayerInput();
     this.score = 0;
     this.lifePoints = 20;
     this.giveUp = false;
     this.isWeaponEquipped = false;
+    this.isPotionConsumed = false;
+    this.gameOver = false;
+    this.hasFled = false;
     this.handPile = undefined;
     this.roomPile = undefined;
     this.fledPile = undefined;
-    this.lastMonsterKilled = undefined;
+    this.lastMonsterKilledCode = "";
+    this.lastMonsterKilledValue = 0;
     this.equipedWeapon = undefined;
     this.reshuffleDeck();
     this.started = false;
   }
-
-  private disablePlayerInput()
-  {
-    this.canPlay = true;
-    setTimeout(()=>{this.canPlay = false}, 1000);
-  }
-
 }

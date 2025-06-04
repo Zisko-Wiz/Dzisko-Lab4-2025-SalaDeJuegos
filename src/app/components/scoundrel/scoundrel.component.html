@@ -4,7 +4,17 @@
     <app-chat class="chat-screen"></app-chat>
 
     <div class="game-screen"
-    [style.pointer-events]=" (this.canPlay) ? 'none' : 'auto' ">
+    [style.pointer-events]=" (this.canPlay) ? 'auto' : 'none' ">
+
+        @if ( this.deck != undefined && this.deck.remaining == 0
+            || this.giveUp == true)
+        {
+
+            <div id="game-over-screen">
+                <img id="game-over" src="game-over.png">
+            </div>
+            
+        }
 
         @if (!this.started)
         {
@@ -53,14 +63,17 @@
                             {
                                 <button class="mat-button-custom" mat-button (click)="this.equipWeapon(card.code)">Equipar</button>
                             } @else {
-                                <button class="mat-button-custom" mat-button>Usar</button>
+                                <button class="mat-button-custom" mat-button (click)="this.drinkPotion(card.code, card.value)">Beber</button>
                             }
                             <button class="mat-button-invisible" mat-button></button>
                         } @else {
                             <button class="mat-button-custom" mat-button (click)="this.attack(card.code, card.value)">ataque sin armas</button>
                             <button class="mat-button-custom" mat-button
-                            [class.disabled-button]="!this.isWeaponEquipped"
-                            [class.disabled-button]="this.lastMonsterKilled != undefined && this.deckService.getCardValue(this.lastMonsterKilled!.value) > 1 && this.deckService.getCardValue(this.lastMonsterKilled!.value) < this.deckService.getCardValue(card.value)"
+                            [class.disabled-button]="!this.isWeaponEquipped
+                                                    || this.handPile?.cards != undefined 
+                                                    && this.handPile!.cards.length > 1 
+                                                    && this.deckService.getCardValue(this.handPile!.cards.at(-1)!.value, true) > 1 
+                                                    && this.deckService.getCardValue(this.handPile!.cards.at(-1)!.value, true) <= this.deckService.getCardValue(card.value, true)"
                             (click)="this.attack(card.code, card.value, true)">ataque con armas</button>
                         }
 
@@ -76,13 +89,15 @@
         </div>
 
         <div id="flee">
-            <button class="mat-button-custom" mat-button>Huir</button>
+            <button class="mat-button-custom" mat-button
+            [class.disabled-button]="this.hasFled"
+            (click)="this.flee()">Huir</button>
         </div>
 
         <div id="hand">
             <div id="weapon">
                 <h1>Arma</h1>
-                @if (this.isWeaponEquipped)
+                @if (this.isWeaponEquipped && this.handPile!.cards[0] != undefined)
                 {
                     <img class="hand-card" src="{{this.handPile!.cards[0].image}}">
                 } @else {
@@ -92,11 +107,11 @@
             
             <div id="monster">
                 <h1>Monstruo</h1>
-                @if (this.lastMonsterKilled == undefined)
+                @if (this.handPile != undefined && this.handPile.cards.length > 1)
                 {
-                    <img class="hand-card" src="blank-card.png">
+                    <img class="hand-card" src="{{this.handPile!.cards.at(-1)!.image}}">
                 } @else {
-                    <img class="hand-card" src="{{this.lastMonsterKilled.image}}">
+                    <img class="hand-card" src="blank-card.png">
                 }
             </div>
         </div>
@@ -107,10 +122,12 @@
         </div>
 
         <div id="end-buttons">
-            <button mat-button class="mat-button-custom">Rendirse</button>
+            <button mat-button class="mat-button-custom"
+            (click)="this.giveUpGame()">Rendirse</button>
 
             <button mat-button
             class="mat-button-custom"
+            id="reset-button"
             (click)="this.reset()">Reiniciar</button>
         </div>
     </div>
