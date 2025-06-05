@@ -14,6 +14,10 @@ const routes: Routes =
   {
     path: 'scoundrel',
     loadComponent: () => import('../../components/scoundrel/scoundrel.component').then(c => c.ScoundrelComponent)
+  },
+  {
+    path: 'preguntados',
+    loadComponent: () => import("../../components/preguntados/preguntados.component").then(c => c.PreguntadosComponent)
   }
 ];
 
