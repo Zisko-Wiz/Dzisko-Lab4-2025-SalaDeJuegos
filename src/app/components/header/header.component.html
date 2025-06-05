@@ -6,6 +6,7 @@
         @if (this.ingreso)
         {
             <li style="float:right"><button (click)="logOut()">Salir</button></li>
+            <li style="float: left;"><button (click)="goToSurvey()">Encuesta</button></li>
         } @else
         {
             <li style="float:right"><button (click)="goToLogin()">Ingresar</button></li>

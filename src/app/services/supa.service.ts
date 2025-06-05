@@ -8,6 +8,6 @@ import { environment } from '../environments/environment';
 })
 export class SupaService
 {
-  supabase = createClient(environment.apiUrl, environment.publicAnonKey)
+  supabase = createClient(environment.apiUrl, environment.publicAnonKey);
 
 }

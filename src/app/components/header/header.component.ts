@@ -93,4 +93,9 @@ export class HeaderComponent implements OnInit, OnDestroy
   {
     this.router.navigate(['home'])
   }
+
+  protected goToSurvey()
+  {
+    this.router.navigate(['encuesta'])
+  }
 }

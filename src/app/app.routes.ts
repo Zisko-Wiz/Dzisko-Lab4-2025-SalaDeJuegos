@@ -29,6 +29,10 @@ export const routes: Routes =
         loadComponent: () => import('./components/registro/registro.component').then(c => c.RegistroComponent)
     },
     {
+        path: 'encuesta',
+        loadComponent: () => import("./components/survey/survey.component").then(c => c.SurveyComponent)
+    },
+    {
         path: '**',
         loadComponent: () => import('./components/error/error.component').then(c => c.ErrorComponent)
     },

@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="form-container">
+
+        <form class="form" [formGroup]="form" (ngSubmit)="this.sendForm()" >
+
+            <label for="nombre">Nombre: </label>
+            <input type="text" class="form-control" id="nombre"  formControlName="nombre">
+            <small class="text-danger">
+            </small>
+
+            <label for="apellido">Apellido: </label>
+            <input type="text" class="form-control" id="apellido" formControlName="apellido">
+            <small class="text-danger">
+            </small>
+
+            <label for="edad">Edad</label>
+            <input type="number" class="form-control" id="edad" formControlName="edad">
+
+            <label for="telefono">Teléfono</label>
+            <input type="text" class="form-control" id="telefono" formControlName="telefono">
+
+            <label for="pregunta1">Juego favorito</label>   
+            <div id="radioButtonBox">
+                <label for="ahorcado">Ahorcado</label><br>
+                <input type="radio" formControlName="pregunta1" value="ahorcado">
+                <label for="mayorMenor">Mayor Menor</label><br>
+                <input type="radio" formControlName="pregunta1" value="mayor menor">
+                <label for="preguntados">Preguntados</label>
+                <input type="radio" formControlName="pregunta1" value="preguntados">
+                <label for="scoundrel">Scoundrel</label>
+                <input type="radio" formControlName="pregunta1" value="scoundrel">
+            </div>
+
+            <label for="pregunta2">Peor juego</label> 
+            <select formControlName="pregunta2">
+                <option value="ahorcado">Ahorcado</option>
+                <option value="preguntados">Preguntados</option>
+                <option value="mayor menor">Mayor Menor</option>
+                <option value="scoundrel">Scoundrel</option>
+            </select>
+
+            <label for="pregunta3">Sugerencias</label> 
+            <textarea id="text-area" formControlName="pregunta3"></textarea>
+
+            <div id="buttons">
+                <button routerLink="/home" mat-button>Cancelar</button>                
+
+                <button mat-button type="submit"
+                [disabled]="!form.valid">Enviar</button>    
+            </div>
+            
+        </form>
+
+    </div>
+</div>
