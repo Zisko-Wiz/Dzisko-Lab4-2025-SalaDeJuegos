@@ -7,6 +7,13 @@
     <div class="game-screen"
     [style.pointer-events]=" (this.canPlay) ? 'auto' : 'none' ">
 
+    @if (this.lives == 0 || this.giveUp)
+    {
+        <div id="game-over-screen">
+            <img id="game-over" src="game-over.png">
+        </div>
+    }
+
     <div id="title-container">
         <h1>¿Cuál es este Pokémon?</h1>
     </div>
@@ -33,28 +40,54 @@
 
     <div id="score-container">
         <h1>Puntaje</h1>
-        <h2>100</h2>
-        <button mat-flat-button>Rendirse</button>
+        <h2>{{this.score}}</h2>
+        <button mat-flat-button
+        (click)="this.giveUpGame()"
+        >Rendirse</button>
+        <button mat-flat-button
+        id="reset-button"
+        (click)="this.resetGame()"
+        >Reiniciar</button>
     </div>
 
     <div id="option1-container">
-        <button mat-flat-button
-        id="option1-button">{{this.pokemonNames[0]}}</button>
+        <button mat-button
+        id="option1-button"
+        [class.mat-custom]="this.answer != 1 && this.answer != 5"
+        [class.mat-wrong]="this.answer == 5"
+        [class.mat-correct]="this.answer == 1"
+        (click)="this.optionSelected(0)"
+        >{{this.capitalizeWord(this.pokemonNames[0])}}</button>
     </div>
 
     <div id="option2-container">                
-            <button mat-flat-button
-            id="option2-button">{{this.pokemonNames[1]}}</button>
+            <button mat-button
+            id="option2-button"
+            [class.mat-custom]="this.answer != 2 && this.answer != 6"
+            [class.mat-wrong]="this.answer == 6"
+            [class.mat-correct]="this.answer == 2"
+            (click)="this.optionSelected(1)"
+            >{{this.capitalizeWord(this.pokemonNames[1])}}</button>
     </div>
 
     <div id="option3-container">
-        <button mat-flat-button
-        id="option3-button">{{this.pokemonNames[2]}}</button>
+        <button mat-button
+        id="option3-button"
+        [class.mat-custom]="this.answer != 3 && this.answer != 7"
+        [class.mat-wrong]="this.answer == 7"
+        [class.mat-correct]="this.answer == 3"
+        (click)="this.optionSelected(2)"
+        >{{this.capitalizeWord(this.pokemonNames[2])}}</button>
     </div>
 
     <div id="option4-container">
-        <button mat-flat-button
-        id="option4-button">{{this.pokemonNames[3]}}</button>
+        <button mat-button
+        id="option4-button"
+        [class.mat-custom]="this.answer != 4 && this.answer != 8"
+        [class.mat-wrong]="this.answer == 8"
+        [class.mat-correct]="this.answer == 4"
+        (click)="this.optionSelected(3)"        
+        >{{this.capitalizeWord(this.pokemonNames[3])}}</button>
     </div>
 
     </div>

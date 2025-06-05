@@ -10,8 +10,8 @@ export class PokeapiService
 
   constructor(private http: HttpClient) {}
 
-  public getPokemon(id:string)
+  public getPokemon(idOrName:string)
   {
-    return this.http.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+    return this.http.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${idOrName}/`);
   }
 }

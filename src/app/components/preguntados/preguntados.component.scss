@@ -44,6 +44,34 @@
     grid-area: 1 / 4 / 3 / 5;
 }
 
+#score-container h1
+{
+    margin-bottom: 0;
+    z-index: 310;
+}
+
+#score-container h2
+{
+    margin: 0;
+    z-index: 310;
+    margin-bottom: 20%;
+}
+
+.mat-button-custom, .mat-wrong, .mat-correct
+{
+    margin: 5%;
+}
+
+.mat-wrong
+{
+    background-color: red;
+}
+
+.mat-correct
+{
+    background-color: aquamarine;
+}
+
 #option1-container, #option2-container, #option3-container, #option4-container, #pokemon-image-container,#title-container
 {
     display: flex;
@@ -76,4 +104,30 @@
 #option4-container
 {
     grid-area: 4 / 3 / 5 / 5;
+}
+
+#game-over-screen
+{
+    grid-area: 1 / 1 / 5 / 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 300;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(187, 55, 55);
+}
+
+#game-over
+{
+    display: flex;
+    height: 89%;
+    aspect-ratio: auto;
+    margin: 0;
+}
+
+#reset-button
+{
+    z-index: 310;
 }
