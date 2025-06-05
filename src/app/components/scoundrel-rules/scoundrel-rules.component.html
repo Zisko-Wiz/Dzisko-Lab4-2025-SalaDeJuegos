@@ -1,43 +1,41 @@
 <app-header></app-header>
 <div class="container">
     <div class="rules-container">
-        <h2>Setup</h2>
-        <p>Scoundrel is played with a standard deck of playing cards.</p>
-        <p>Search through the deck and remove all Jokers, Red Face Cards and Red Aces. Place them off to the side, they are not used in this game..</p>
-        <p>Shuffle the remaining cards and place the pile face down on your left. This deck is called the Dungeon</p>
-        <p>Take out a piece of paper and pen (or use your memory). Mark down 20 on the piece of paper, this is your starting Health.</p>
+        <h2>Configuración</h2>
+        <p>Scoundrel se juega con una baraja inglesa.</p>
+        <p>Busca en el mazo y remueve todos los comodines, las caras rojas y las ases rojas. Estas cartas no se usarán en este juego.</p>
+        <p>Mezcla las cartas restantes y colocalas en una pila boca abajo. Este mazo es llamado "la Mazmorra".</p>
+        <p>Marca "20" en una pieza de papel (o usa tu memoria), esta es tu Salud inicial.</p>
         <br>
-        <h2>Rules</h2>
-        <p>The 26 Clubs and Spades in the deck are Monsters. Their damage is equal to their ordered value. (e.g.10 is 10, Jack is 11, Queen is 12, King is 13, and Ace is 14)</p>
-        <p>The 9 Diamonds in the deck are Weapons. Each weapon does as much damage as its value. All weapons in Scoundrel are binding, meaning if you pick one up, you must equip it, and discard your previous weapon.</p>
-        <p>The 9 Hearts in the deck are Health Potions. You may only use one health potion each turn, even if you pull two. The second potion you pull is simply discarded. You may not restore your life beyond your starting 20 health.</p>
-        <p>You may locate the discard deck (any discarded cards) anywhere you wish, though I recommend to the right of the Room. Cards are discarded face down.</p>
-        <p>The Game ends when either your life reaches 0 or you make your way through the entire Dungeon.</p>
+        <h2>Reglas</h2>
+        <p>Las 26 Picas y Tréboles en el mazo son Monstruos. Sus daño es igual a su valor ordenado (por ej. 10 es 10, Jota es 11, Reina es 12, Rey es 13, y As es 14)</p>
+        <p>Los 9 Diamantes en el mazo son Armas. Cada arma inflije tanto daño como su valor. Todas las armas en Scoundrel son vinculantes, es decir que si agarras una, debes equiparla y descartar el arma anterior.</p>
+        <p>Los 9 Corazones en el mazo son Pociones. Sólo podés usar una poción de salud cada turno, incluso si sacás dos. La segunda poción que saques se descarta. No podés restaurar tu vida más allá de las 20 Salud iniciales.</p>
+        <p>Puedes colocar el mazo de cartas en cualquier lado, aunque se recomienda colocarlo a la derecha de la Habitación. Las cartas se descartan boca abajo.</p>
+        <p>El Juego termina cuanto tu vida llegue a 0 o logres atravesar la Mazmorra completa.</p>
         <br>
-        <h2>Scoring</h2>
-        <p>- If your life has reached zero, find all the remaining monsters in the Dungeon, and subtract their values from your life, this negative value is your score.</p>
-        <p>- If you have made your way through the entire dungeon, your score is your positive life, or if your life is 20, and your last card was a health potion, your life + the value of that potion</p>
+        <h2>Puntaje</h2>
+        <p>En esta versión sumas un punto cada turno que completes.</p>
         <br>
-        <h2>Gameplay</h2>
-        <p>On your first and every turn, flip over cards off the top of the deck, one by one, until you have 4 cards face up in front of you to make an Room.</p>
-        <p>You may avoid the Room if you wish. If you chose to do so, scoop up all four cards in one motion and place them at the bottom of the Dungeon. While you may avoid as many Rooms as you want, you may not avoid two Rooms in a row.</p>
-        <p>If you choose not to avoid the Room, one by one, you must face 3 of the four cards it contains.</p>
-        <p>Take them one at a time</p>
-        <h3>If you chose a Weapon...</h3>
-        <p>You must equip it. Do this by placing it face up between you and the remaining Room cards. If you had a previous Weapon equipped, move it and any Monsters on it to the discard deck.</p>
-        <h3>If you chose a Health Potion ...</h3>
-        <p>Add its number to your health, and than discard it. Your health may not exceed 20, and you may not use more than one Health Potion per turn. If you take two Health Potions on a single turn, the second is simply discarded, adding nothing to your health.</p>
-        <h3>If you chose a Monster...</h3>
-        <p>You may either fight it barehanded or with an equipped Weapon</p>
+        <h2>Jugabilidad</h2>
+        <p>En tu primer y cada turno, da vuelta las cartas de la parte superior de la baraja, una por una, hasta que tengas 4 cartas boca arriba frente a ti para crear la Habitación.</p>
+        <p>Puedes huir de una Habitación. Si lo haces, toma todas las cartas y devuélvelas al fondo del mazo. Aunque puedes huir de tantas Habitaciones como quieras, no puedes huir de dos Habitaciones seguidas.</p>
+        <p>Si eliges huir de la Habitación, una por una, debes enfrentar 3 de las 4 cartas que contiene.</p>
+        <h3>Si eliges un Arma...</h3>
+        <p>Debes equiparla. Hazlo colocándola boca arriba entre vos y la Habitación. Si tenias previamente equipada un Arma, descártala junto a todos los Monstruos que tenga.</p>
+        <h3>Si eliges una Poción de Salud ...</h3>
+        <p>Agrega su número a tu salud, y luego descártala. Tu salud no puede exceder 20, y no puedes usar más de una Poción de Salud por turno. Si tomás dos Pociones de Salud en un mismo turno, el segundo simplemente se descarta, sin agregarse a tu salud.</p>
+        <h3>Si eliges un Monstruo...</h3>
+        <p>Puedes luchar sin armas o con un Arma equipada.</p>
         <br>
-        <h2>Combat</h2>
-        <p>- If you choose to fight the Monster barehanded, subtract its full value from your Health, and move the Monster to the discard deck.</p>
-        <p>- If you choose to fight the Monster with your equipped Weapon, place the monster face up on top of the weapon (and on top of any other Monsters on the Weapon). Be sure to stagger the placement of the Monster so that the Weapon's number is still showing. subtract the Weapon's value from the Monster's value and subtract any remaining value from your health</p>
-        <p>For example, if your Weapon is a 5, and you place a 3 Monster on it, you take no damage. ( 3-5 < 0) If your Weapon is a 5 and you place a Jack Monster on it, you take 6 damage. ( 11 - 5 = 5 dmg)</p>
-        <p>It is important to note that although you retain your weapons until they are replaced, once a Weapon is used on a monster, the Weapon can then only be used to slay Monsters of a lower value (less than equal) than the previous Monster it had slain.</p>
+        <h2>Combate</h2>
+        <p>- Si elegiste luchar contra el Monstruo sin armas, resta de tu Salud su valor completo y descarta al Monstruo.</p>
+        <p>- Si elegiste luchar contra el Monstruo con tu Arma equipada, coloca al monstruo boca arriba junto a tu arma (y encima de cualquier monstruo que ya esté junto al Arma). Resta el valor del Arma al valor del Monstruo y resta ese resultado de tu salud</p>
+        <p>Por ejemplo, si tu Arma es un 5, y colocas un Monstruo 4 a su lado, no recibes daño (3 - 5 < 0) Si tu arma es un 5 y colocas un Monstruo Jota, recibes 6 de daño (11 - 5 = 6)</p>
+        <p>Es importante remarcar que aunque mantengas tu Arma hasta que sea reemplazada, una vez que un Arma se use contra un Monstruo, esa Arma solo puede usarse para matar a un Monstruo de menor valor (menos que igual) que el Monstruo matado anteriormente.</p>
         <p>For example, if your 5 Weapon has killed a Queen Monster and you then choose a 6 Monster, you may use your Weapon on the 6 Monster, as 6 is less than 12</p>
-        <p>But, if you have used your 5 Weapon on a 6 Monster, and you then choose a Queen Monster you must fight the Queen barehanded as Queen,12, is greater than 6. Despite this, the Weapon is not discarded, as it could still be used against Monsters weaker than a 6.</p>
+        <p>Por ejemplo, si tu Arma 5 mató un Monstruo 6, y luego eliges a un Monstruo Reina debes luchar contra la Reina sin armas, ya que la Reina, 12, es mayor que 6. A pesar de esto, el Arma no es descartada y puede seguir siendo usada contra Monstruos menores a 6.</p>
         <br>
-        <p>Once you have chosen 3 cards (such that only one remains), your turn is complete. Leave the fourth card face up in front of you as part of the next Room.</p>
+        <p>Una vez que hayas elegido 3 cartas (de tal forma que solo quede una), tu turno termina. Dejando la cuarta carta enfrente tuyo como parte de la siguiente Habitación.</p>
     </div>
 </div>
