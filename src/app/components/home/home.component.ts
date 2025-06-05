@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { Router, RouterLink } from '@angular/router';
 import { ChatComponent } from '../chat/chat.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +11,9 @@ import { ChatComponent } from '../chat/chat.component';
   [ 
     HeaderComponent,
     ChatComponent,
-    RouterLink
+    RouterLink,
+    MatCardModule,
+    MatButtonModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

@@ -2,9 +2,81 @@
 <div class="container-games">
     <app-chat class="chat-screen"></app-chat>
     <div class="game-screen" >
-        <button routerLink="/juegos/ahorcado">Ahorcado</button>
-        <button routerLink="/juegos/mayor-menor">MayorMenor</button>
-        <button routerLink="/juegos/preguntados">Preguntados</button>
-        <button routerLink="/juegos/scoundrel">Scoundrel</button>
+
+        <div id="ahorcado">
+            <mat-card class="card" appearance="outlined">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Ahorcado</mat-card-title>
+                </mat-card-header>
+                <img class="card-img" mat-card-image src="ahorcado-thumb.png">
+                <mat-card-content>
+                    <p>
+                    Adivina la palabra antes de que nuestro monigote sea ahorcado.
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                <button mat-flat-button routerLink="/juegos/ahorcado">Jugar</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
+        <div id="mayor-menor">
+            <mat-card class="card" appearance="outlined">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Mayor Menor</mat-card-title>
+                </mat-card-header>
+                <img class="card-img" mat-card-image src="mayorMenor-thumb.png">
+                <mat-card-content>
+                    <p>
+                    Adivina si la siguiente carta es mayor o menor. Acierta tanto como puedas en tres intentos.
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                <button mat-flat-button routerLink="/juegos/mayor-menor">Jugar</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
+        <div id="preguntados">
+            <mat-card class="card" appearance="outlined">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Preguntados</mat-card-title>
+                </mat-card-header>
+                <img class="card-img" mat-card-image src="preguntados-thumb.png">
+                <mat-card-content>
+                    <p>
+                    Demuestra tus conocimientos de Pokémon seleccionando el nombre correcto.
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                <button mat-flat-button routerLink="/juegos/preguntados">Jugar</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
+        <div id="scoundrel">
+            <mat-card class="card" appearance="outlined">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Scoundrel</mat-card-title>
+                </mat-card-header>
+                <img class="card-img" mat-card-image src="scoundrel-thumb.png">
+                <mat-card-content>
+                    <p>
+                    Intenta huir de esta mazmorra, combatiendo contra monstruos y bebiendo pociones.
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                <button mat-flat-button routerLink="/juegos/scoundrel">Jugar</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
     </div>
 </div>
