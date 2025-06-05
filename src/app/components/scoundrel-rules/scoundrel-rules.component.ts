@@ -3,15 +3,13 @@ import { HeaderComponent } from '../header/header.component';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-about',
-  imports:
-  [
+  selector: 'app-scoundrel-rules',
+  imports: [
     HeaderComponent,
-    RouterLink
   ],
-  templateUrl: './about.component.html',
-  styleUrl: './about.component.scss'
+  templateUrl: './scoundrel-rules.component.html',
+  styleUrl: './scoundrel-rules.component.scss'
 })
-export class AboutComponent {
+export class ScoundrelRulesComponent {
 
 }

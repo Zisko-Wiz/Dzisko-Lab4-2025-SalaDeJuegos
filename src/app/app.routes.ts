@@ -33,6 +33,10 @@ export const routes: Routes =
         loadComponent: () => import("./components/survey/survey.component").then(c => c.SurveyComponent)
     },
     {
+        path: 'scoundrel/reglas',
+        loadComponent: () => import("./components/scoundrel-rules/scoundrel-rules.component").then(c => c.ScoundrelRulesComponent)
+    },
+    {
         path: '**',
         loadComponent: () => import('./components/error/error.component').then(c => c.ErrorComponent)
     },
