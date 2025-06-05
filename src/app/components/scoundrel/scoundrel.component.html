@@ -7,7 +7,8 @@
     [style.pointer-events]=" (this.canPlay) ? 'auto' : 'none' ">
 
         @if ( this.deck != undefined && this.deck.remaining == 0
-            || this.giveUp == true)
+            || this.giveUp == true
+            || this.lifePoints <= 0)
         {
 
             <div id="game-over-screen">

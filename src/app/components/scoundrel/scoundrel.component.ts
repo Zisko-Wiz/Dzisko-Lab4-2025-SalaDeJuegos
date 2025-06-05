@@ -28,6 +28,7 @@ export class ScoundrelComponent implements OnInit, OnDestroy
   protected lifePoints: number = 20;
   protected isWeaponEquipped: boolean = false;
   private isPotionConsumed: boolean = false;
+  private isRoomChecked: boolean = false;
   protected hasFled: boolean = false;
   protected lastMonsterKilledCode: string = "";
   protected lastMonsterKilledValue: number = 0;
@@ -84,6 +85,10 @@ export class ScoundrelComponent implements OnInit, OnDestroy
       {
         this.deck = data;
         this.addToPile(this.roomSubscription,"room", this.getListOfCards(data).join(","));
+      },
+      complete: () =>
+      {
+        this.isRoomChecked = false;
       }
     })
   }
@@ -103,6 +108,8 @@ export class ScoundrelComponent implements OnInit, OnDestroy
       {
         if (pileName == "hand")
         {
+          console.log(altCardCode);
+          
           this.addToPile(this.handSubscription, "hand", altCardCode, false);  
         }
       }
@@ -161,8 +168,6 @@ export class ScoundrelComponent implements OnInit, OnDestroy
             
             case "hand":
               this.handPile = data.piles.hand;
-              console.log(this.handPile);
-              
               this.isWeaponEquipped = true;
           break;
         }
@@ -171,12 +176,10 @@ export class ScoundrelComponent implements OnInit, OnDestroy
       {
         this.canPlay = true;
 
-        switch (pileName) {
+        switch (pileName)
+        {
           case "room":
             this.checkRoom();
-            break;
-        
-          default:
             break;
         }
       }      
@@ -279,8 +282,9 @@ export class ScoundrelComponent implements OnInit, OnDestroy
 
   private checkRoom() : void
   { 
-    if (this.roomPile != undefined && this.roomPile.cards.length == 1)
+    if (!this.isRoomChecked && this.roomPile != undefined && this.roomPile.cards.length == 1)
     {
+      this.isRoomChecked = true;
       this.canPlay = false;
       this.isPotionConsumed = false;
       this.hasFled = false;
